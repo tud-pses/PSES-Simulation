@@ -29,13 +29,14 @@ double radToDeg(double angle){
 
 }
 
-RangeSensor::RangeSensor(const SensorType& type) : type(type) {}
+RangeSensor::RangeSensor(const SensorType& type) : type(type){
+};
 
 void RangeSensor::setConfig(pses_simulation::RangeSensorConfig& config){
   this->config = config;
 }
 
-void RangeSensor::setMap(const Mat& map){
+void RangeSensor::setMap(const cv::Mat& map){
         this->map = map;
 }
 
@@ -43,7 +44,7 @@ void RangeSensor::setMapMetaData(const nav_msgs::MapMetaData& mapInfo){
         this->mapInfo = mapInfo;
 }
 
-const rs::rangeArray_ptr RangeSensor::getLaserScan(const Point sensorPos, const double theta) const {
+const rs::rangeArray_ptr RangeSensor::getLaserScan(const cv::Point sensorPos, const double theta) const {
         //yaw needs to be shifted by -90deg because robot people put their yaw=0 on the positive x-axis
         //double yaw = rs::correctYawAngle(theta, -90);
         //yaw = theta;
@@ -69,7 +70,7 @@ const rs::rangeArray_ptr RangeSensor::getLaserScan(const Point sensorPos, const 
         double maxDistance = range/mapInfo.resolution;
 
         for (int a = 0; a < nAngles; a++) {
-                Point P2;
+                cv::Point P2;
 
                 P2.x = (int) round(
                         sensorPos.x
@@ -78,21 +79,21 @@ const rs::rangeArray_ptr RangeSensor::getLaserScan(const Point sensorPos, const 
                         sensorPos.y
                         + maxDistance * std::sin((-angle) * CV_PI / 180.0)); // - vor angle entfernt
 
-                LineIterator it(map, sensorPos, P2, 8);
-                Point currentPos = it.pos();
+                cv::LineIterator it(map, sensorPos, P2, 8);
+                cv::Point currentPos = it.pos();
                 for (int i = 0; i < it.count; i++, ++it) {
                         currentPos = it.pos();
                         if (map.at<uchar>(currentPos) == obstacleColor) {
                                 break;
                         }
                 }
-                double scannedRange = norm(sensorPos-currentPos)*mapInfo.resolution;
+                double scannedRange = cv::norm(sensorPos-currentPos)*mapInfo.resolution;
                 rangeArray[a]=scannedRange;
                 angle = rs::correctYawAngle(angle, resolution);
         }
         return std::make_shared<std::vector<float> >(rangeArray);
 }
-const double RangeSensor::getUSScan(const Point sensorPos, const double theta) const{
+const double RangeSensor::getUSScan(const cv::Point sensorPos, const double theta) const{
   std::vector<float> rangeArray = *getLaserScan(sensorPos, theta);
   double minOfRange = rangeArray[0];
   for(auto current : rangeArray) {

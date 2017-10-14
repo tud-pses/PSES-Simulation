@@ -10,7 +10,7 @@
 #include <sensor_msgs/Range.h>
 #include <yaml-cpp/yaml.h>
 #include <dynamic_reconfigure/server.h>
-#include <pses_simulation//RangeSensorConfig.h>
+#include <pses_simulation/RangeSensorConfig.h>
 #include <pses_simulation/RangeSensor.h>
 
 typedef std::shared_ptr<sensor_msgs::LaserScan> scan_msg_ptr;

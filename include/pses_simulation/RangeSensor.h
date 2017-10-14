@@ -1,9 +1,8 @@
 #ifndef RANGESENSOR_H_
 #define RANGESENSOR_H_
 
-//#include <opencv2/opencv.hpp>
-//#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv/cv.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <vector>
 #include <memory>
 #include <pses_simulation/RangeSensorConfig.h>
@@ -23,19 +22,18 @@ class RangeSensor;
 }
 
 using rs::RangeSensor;
-using cv;
 class RangeSensor {
 public:
                 RangeSensor(const SensorType& type);
                 void setConfig(pses_simulation::RangeSensorConfig& config);
-                void setMap(const Mat& map);
+                void setMap(const cv::Mat& map);
                 void setMapMetaData(const nav_msgs::MapMetaData& mapInfo);
-                const rs::rangeArray_ptr getLaserScan(const Point sensorPos, const double theta) const;
-                const double getUSScan(const Point sensorPos, const double theta) const;
+                const rs::rangeArray_ptr getLaserScan(const cv::Point sensorPos, const double theta) const;
+                const double getUSScan(const cv::Point sensorPos, const double theta) const;
 private:
                 SensorType type;
                 pses_simulation::RangeSensorConfig config;
-                Mat map;
+								cv::Mat map;
                 nav_msgs::MapMetaData mapInfo;
 };
 

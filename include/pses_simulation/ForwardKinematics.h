@@ -1,10 +1,3 @@
-/*
- * ForwardKinematics.h
- *
- *  Created on: 24.11.2015
- *      Author: Basti
- */
-
 #ifndef FORWARDKINEMATICS_H_
 #define FORWARDKINEMATICS_H_
 
@@ -19,6 +12,7 @@ public:
 								ForwardKinematics();
 								ForwardKinematics(const ForwardKinematics &other);
 								ForwardKinematics(double k);
+                                const double getRadius() const;
 								double flattenZeros(double value);
 								double degToRad(double angle);
 								double radToDeg(double angle);
@@ -32,7 +26,7 @@ public:
 
 private:
 								double k;
-
+                                double radius;
 								Eigen::Matrix4d initT;
 								std::vector<Eigen::Matrix4d>T;
 								Eigen::Matrix4d prevT;

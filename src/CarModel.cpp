@@ -1,13 +1,8 @@
-/*
- * CarModel.cpp
- *
- *  Created on: 11.05.2016
- *      Author: Basti
- */
-
 #include <pses_simulation/CarModel.h>
 
-CarModel::CarModel(const double dAxis, const ros::Time& time) : lastUpdate(time) {
+CarModel::CarModel(const double dAxis, const ros::Time& time, const double vMax, const double angleMax,
+                   const double speedMax, const double steeringMax) : lastUpdate(time), vMax(vMax),
+                    angleMax(angleMax), speedMax(speedMax), steeringMax(steeringMax) {
 								// init kinematic model
 								fwdKin = ForwardKinematics(dAxis);
 								// set steering to quasi neutral
@@ -22,33 +17,39 @@ CarModel::CarModel(const double dAxis, const ros::Time& time) : lastUpdate(time)
 }
 
 const pose_ptr CarModel::getUpdate(const int newSteering, const int newSpeed, const ros::Time& time){
-								timeStep = (time-lastUpdate).toNSec()/NSEC_PER_SEC;
-								//ROS_INFO("timestep: %lf", timeStep);
+                                timeStep = (time-lastUpdate).toSec();
 								lastUpdate = time;
-								double ds = velocity * timeStep;
-								//double ds = speedToVelocity(newSpeed) * timeStep;
+                                double ds = velocity * timeStep;
 								double oldYaw = pose[2];
 								pose = fwdKin.getUpdate(fwdKin.degToRad(steeringAngle), ds);
 								distance += std::fabs(ds);
+                                double prevV = velocity;
 								speedToVelocity(newSpeed);
-								setAngularVelocity(oldYaw, pose[2]);
-								setSteering(newSteering);
+                                setAngularVelocity(oldYaw);
+                                setSteering(newSteering);
+                                setVelocityComponents();
+                                setAccelerationComponents(prevV);
 								return std::make_shared<std::vector<double> >(pose);
 }
 
 const pose_ptr CarModel::getUpdateTwist(const twist_msg cmdVel, const ros::Time& time){
-								timeStep = (time-lastUpdate).toNSec()/NSEC_PER_SEC;
+                                timeStep = (time-lastUpdate).toSec();
 								lastUpdate =time;
 								double ds = velocity * timeStep;
 								double oldYaw = pose[2];
 								pose = fwdKin.getUpdate(fwdKin.degToRad(steeringAngle), ds);
 								distance += std::fabs(ds);
-								velocity = cmdVel.linear.x;
-								setAngularVelocity(oldYaw, pose[2]);
-								angleToSteering(fwdKin.radToDeg(cmdVel.angular.z));
-								//steeringAngle = fwdKin.radToDeg(cmdVel.angular.z);
-								//ROS_INFO("x: %lf / y: %lf / th: %lf / cmdVelx: %lf/ cmdAngz: %lf", pose[0], pose[1], pose[2], cmdVel.linear.x, cmdVel.angular.z);
+                                double prevV = velocity;
+                                setVelocity(cmdVel.linear.x);
+                                setAngularVelocity(oldYaw);
+                                angleToSteering(fwdKin.radToDeg(cmdVel.angular.z));
+                                setVelocityComponents();
+                                setAccelerationComponents(prevV);
 								return std::make_shared<std::vector<double> >(pose);
+}
+
+const double CarModel::getTimeStep() const {
+								return timeStep;
 }
 
 const double CarModel::getDistance() const {
@@ -70,37 +71,43 @@ const double CarModel::getAngularVelocity() const {
 								return angularVelocity;
 }
 
+const double CarModel::getVx() const{
+								return v_x;
+}
+const double CarModel::getVy() const{
+								return v_y;
+}
+const double CarModel::getAx() const{
+								return a_x;
+}
+const double CarModel::getAy() const{
+								return a_y;
+}
+
 void CarModel::angleToSteering(const double alpha){
-								if(alpha>=angleArray[0]) {
-																setSteering(-50);
-																return;
-								}else if(alpha<=angleArray[100]) {
-																setSteering(50);
-																return;
-								}else{
-																for(int i = 1; i <= 100; i++) {
-																								if(alpha < angleArray[i-1] && alpha >= angleArray[i]) {
-																																setSteering(i-50);
-																																return;
-																								}
-																}
-								}
+                                if(alpha>angleMax){
+                                    setSteering(steeringMax);
+                                }else if(alpha<-angleMax){
+                                    setSteering(-steeringMax);
+                                }else{
+                                    setSteering((alpha/angleMax)*steeringMax);
+                                }
+}
+void CarModel::setVelocity(const double newVel){
+                                if(newVel>vMax){
+                                    speedToVelocity(speedMax);
+                                }else if(newVel<-vMax){
+                                    speedToVelocity(-speedMax);
+                                }else{
+                                    speedToVelocity((newVel/vMax)*speedMax);
+                                }
 }
 
 void CarModel::speedToVelocity(const int speed) {
-								if(speed<=-10) {
-																velocity = velocityArray[0];
-								}else if(speed>=10) {
-																velocity = velocityArray[20];
-								}else{
-																velocity = velocityArray[10+speed];
-								}
+                                velocity = (speed/speedMax)*vMax;
 }
-
-
-
-void CarModel::setAngularVelocity(const double yaw0, const double yaw1){
-								double dTh = yaw1-yaw0;
+void CarModel::setAngularVelocity(const double oldYaw){
+                                double dTh = pose[2]-oldYaw;
 								if(dTh<-fwdKin.PI) {
 																dTh += 2*fwdKin.PI;
 								}else if(dTh>fwdKin.PI) {
@@ -108,21 +115,31 @@ void CarModel::setAngularVelocity(const double yaw0, const double yaw1){
 								}
 								angularVelocity = dTh/timeStep;
 }
-
 void CarModel::setSteering(const int steering){
-								if(steering>50) {
-																this->steering = 50;
+                                if(steering>steeringMax) {
+                                                                this->steering = steeringMax;
 																steeringToAngle();
-								}else if(steering < -50) {
-																this->steering = -50;
+                                }else if(steering < -steeringMax) {
+                                                                this->steering = -steeringMax;
 																steeringToAngle();
 								}else{
 																this->steering = steering;
 																steeringToAngle();
 								}
 }
-
-
 void CarModel::steeringToAngle(){
-								steeringAngle = angleArray[steering+50];
+                                steeringAngle = (steering/steeringMax)*angleMax;
+}
+void CarModel::setVelocityComponents(){
+                                v_x = velocity*std::cos(pose[2]);
+                                v_y = velocity*std::sin(pose[2]);
+}
+void CarModel::setAccelerationComponents(const double prevV){
+                                a_x = (velocity-prevV)/timeStep;
+                                if(steeringAngle==0){
+                                    a_y=0;
+                                }else{
+                                    double sign = (steeringAngle>0)?1:-1;
+                                    a_y = sign*velocity*velocity/fwdKin.getRadius();
+                                }
 }
