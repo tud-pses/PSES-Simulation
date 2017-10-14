@@ -125,7 +125,7 @@ include_directories(include ${OpenCV_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
 #   src/${PROJECT_NAME}/src/simulation_control.cpp
 # )
 add_library(project_simulation
-  #src/RangeSensor.cpp
+  src/RangeSensor.cpp
   src/CarModel.cpp
   src/ForwardKinematics.cpp
 )
@@ -137,8 +137,8 @@ add_library(project_simulation
 
 ## Declare a C++ executable
 add_executable(simulation src/simulation_control.cpp)
-#add_executable(scan src/simulation_laserscan.cpp)
-#add_executable(usrange src/simulation_usscan.cpp)
+add_executable(laserrange src/simulation_laserscan.cpp)
+add_executable(usrange src/simulation_usscan.cpp)
 #add_executable(measurements src/simulation_measurements.cpp)
 
 
@@ -163,9 +163,17 @@ target_link_libraries(simulation
 #target_link_libraries(scan
 #   ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp project_simulation
 # )
-# target_link_libraries(usrange
-#   ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp project_simulation
-# )
+target_link_libraries(project_simulation
+  ${catkin_LIBRARIES} ${OpenCV_LIBS} project_simulation
+)
+
+target_link_libraries(usrange
+  ${catkin_LIBRARIES} yaml-cpp project_simulation
+)
+
+target_link_libraries(laserrange
+  ${catkin_LIBRARIES} yaml-cpp project_simulation
+)
 # target_link_libraries(measurements
 #   ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp project_simulation
 # )

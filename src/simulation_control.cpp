@@ -211,7 +211,7 @@ int main(int argc, char** argv)
     currentTime = ros::Time::now();
     if (isTwistCmd == false)
     {
-      simPose = *car.getUpdate(steeringCmd / 20, motorCmd / 50, currentTime);
+      simPose = *car.getUpdate(-steeringCmd / 20, motorCmd / 50, currentTime);
     }
     else
     {

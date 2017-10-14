@@ -2,7 +2,6 @@
 #include <ros/package.h>
 #include <geometry_msgs/TransformStamped.h>
 #include <nav_msgs/MapMetaData.h>
-#include <iostream>
 #include <sensor_msgs/LaserScan.h>
 #include <tf/transform_listener.h>
 #include <string>

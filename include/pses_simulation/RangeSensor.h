@@ -7,7 +7,6 @@
 #include <memory>
 #include <pses_simulation/RangeSensorConfig.h>
 #include <nav_msgs/MapMetaData.h>
-#include <iostream>
 
 namespace rs {
 typedef std::shared_ptr<std::vector<float> > rangeArray_ptr;

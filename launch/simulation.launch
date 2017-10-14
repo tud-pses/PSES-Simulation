@@ -11,6 +11,8 @@
 	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
 	<!-- Run the necessary nodes to bring up the car -->
         <node pkg="pses_simulation" type="simulation" name="simulation" output="screen"/>
+        <node pkg="pses_simulation" type="usrange" name="usrange" output="screen"/>
+        <node pkg="pses_simulation" type="laserrange" name="laserrange" output="screen"/>
 	<!-- Run the map server -->
         <node name="map_server" pkg="map_server" type="map_server" args="$(find pses_simulation)/data/map/map.yaml"/>
 

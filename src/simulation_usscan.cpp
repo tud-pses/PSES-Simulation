@@ -2,11 +2,9 @@
 #include <ros/package.h>
 #include <geometry_msgs/TransformStamped.h>
 #include <nav_msgs/MapMetaData.h>
-#include <iostream>
 #include <tf/transform_listener.h>
 #include <string>
 #include <vector>
-#include <stdexcept>
 #include <sensor_msgs/Range.h>
 #include <yaml-cpp/yaml.h>
 #include <pses_simulation/RangeSensor.h>
@@ -102,9 +100,9 @@ int main(int argc, char **argv){
         dynamic_reconfigure::Server<pses_simulation::RangeSensorConfig>::CallbackType f;
         pses_simulation::RangeSensorConfig dynConfig;
 
-        ros::Publisher front_us_range = nh.advertise<sensor_msgs::Range>("front_us_range", 10);
-        ros::Publisher left_us_range = nh.advertise<sensor_msgs::Range>("left_us_range", 10);
-        ros::Publisher right_us_range = nh.advertise<sensor_msgs::Range>("right_us_range", 10);
+        ros::Publisher front_us_range = nh.advertise<sensor_msgs::Range>("/uc_bridge/usf", 10);
+        ros::Publisher left_us_range = nh.advertise<sensor_msgs::Range>("/uc_bridge/usl", 10);
+        ros::Publisher right_us_range = nh.advertise<sensor_msgs::Range>("/uc_bridge/usr", 10);
 
         sensor_msgs::Range front_range, left_range, right_range;
 
