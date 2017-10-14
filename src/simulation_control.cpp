@@ -1,109 +1,110 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
-#include <iostream>
-#include <CarModel.h>
+#include <std_msgs/Int16.h>
+#include <pses_simulation/CarModel.h>
 #include <vector>
 #include <nav_msgs/Odometry.h>
 #include <tf/transform_broadcaster.h>
-#include <simulation/ctrl_msg.h>
-#include <simulation/telemetry_msg.h>
 
-geometry_msgs::Twist motion;
-simulation::ctrl_msg control;
-std::vector<double>simPose;
-int sbplFlag;
+typedef geometry_msgs::Twist twist_msg;
+typedef std_msgs::Int16 int16_msg;
 
-
-void motionCommands(const geometry_msgs::Twist::ConstPtr& motionCMD)
+void motionCommand(const twist_msg::ConstPtr& cmdIn, twist_msg* cmdOut,
+                   bool* isTwistCmd)
 {
-        motion = *motionCMD;
-        sbplFlag = 1;
+  *cmdOut = *cmdIn;
+  *isTwistCmd = true;
 }
 
-void controlCommands(const simulation::ctrl_msg::ConstPtr& ctrlCMD)
+void steeringCommand(const int16_msg::ConstPtr& cmdIn, int* cmdOut,
+                     bool* isTwistCmd)
 {
-        control = *ctrlCMD;
-        sbplFlag = 0;
+  *cmdOut = cmdIn->data;
+  *isTwistCmd = false;
 }
 
-int main(int argc, char **argv){
+void motorCommand(const int16_msg::ConstPtr& cmdIn, int* cmdOut,
+                  bool* isTwistCmd)
+{
+  *cmdOut = cmdIn->data;
+  *isTwistCmd = false;
+}
 
-        ros::init(argc, argv, "simulation_control");
-        ros::NodeHandle nh;
-        ros::Time currentTime = ros::Time::now();
+int main(int argc, char** argv)
+{
 
-        CarModel car(0.25, currentTime);
-        motion = geometry_msgs::Twist();
-        control = simulation::ctrl_msg();
-        simulation::telemetry_msg telemetry;
-        tf::TransformBroadcaster odom_broadcaster;
-        sbplFlag = 1;
+  ros::init(argc, argv, "simulation");
+  ros::NodeHandle nh;
+  ros::Time currentTime = ros::Time::now();
 
-        ros::Subscriber motionControl = nh.subscribe<geometry_msgs::Twist>("cmd_vel", 10, motionCommands);
-        ros::Subscriber steeringControl = nh.subscribe<simulation::ctrl_msg>("robot_control", 10, controlCommands);
-        ros::Publisher odomPub = nh.advertise<nav_msgs::Odometry>("odom", 10);
-        ros::Publisher telemetryPub = nh.advertise<simulation::telemetry_msg>("telemetry", 10);
+  CarModel car(0.25, currentTime);
+  std::vector<double> simPose;
+  twist_msg motionCmd;
+  int steeringCmd, motorCmd;
+  bool isTwistCmd = true;
+  tf::TransformBroadcaster odom_broadcaster;
 
+  ros::Subscriber motionControl = nh.subscribe<twist_msg>(
+      "cmd_vel", 10, boost::bind(motionCommand, _1, &motionCmd, &isTwistCmd));
+  ros::Subscriber steeringControl = nh.subscribe<int16_msg>(
+      "/uc_bridge/set_steering_level_msg", 1,
+      boost::bind(steeringCommand, _1, &steeringCmd, &isTwistCmd));
+  ros::Subscriber motorControl = nh.subscribe<int16_msg>(
+      "/uc_bridge/set_motor_level_msg", 1,
+      boost::bind(motorCommand, _1, &motorCmd, &isTwistCmd));
+  ros::Publisher odomPub = nh.advertise<nav_msgs::Odometry>("odom", 10);
 
+  // Loop starts here:
+  ros::Rate loop_rate(100);
+  while (ros::ok())
+  {
+    currentTime = ros::Time::now();
+    if (isTwistCmd==false)
+    {
+      simPose = *car.getUpdate(steeringCmd / 20, motorCmd / 50, currentTime);
+    }
+    else
+    {
+      simPose = *car.getUpdateTwist(motionCmd, currentTime);
+    }
 
-        // Loop starts here:
-        ros::Rate loop_rate(100);
-        while(ros::ok()) {
-                currentTime = ros::Time::now();
-                if(sbplFlag==0) {
-                        simPose = *car.getUpdate(control.steering, control.speed, currentTime);
-                }else{
-                        simPose = *car.getUpdateTwist(motion, currentTime);
-                }
+    geometry_msgs::Quaternion odom_quat =
+        tf::createQuaternionMsgFromYaw(simPose[2]);
 
-                geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(simPose[2]);
+    // first, we'll publish the transform over tf
+    geometry_msgs::TransformStamped odom_trans;
+    odom_trans.header.stamp = currentTime;
+    odom_trans.header.frame_id = "odom";
+    odom_trans.child_frame_id = "base_footprint";
 
-                // first, we'll publish the transform over tf
-                geometry_msgs::TransformStamped odom_trans;
-                odom_trans.header.stamp = currentTime;
-                odom_trans.header.frame_id = "odom";
-                odom_trans.child_frame_id = "base_footprint";
+    odom_trans.transform.translation.x = simPose[1];
+    odom_trans.transform.translation.y = -simPose[0];
+    odom_trans.transform.translation.z = 0.0;
+    odom_trans.transform.rotation = odom_quat;
+    // send the transform
+    odom_broadcaster.sendTransform(odom_trans);
 
-                odom_trans.transform.translation.x = simPose[1];
-                odom_trans.transform.translation.y = -simPose[0];
-                odom_trans.transform.translation.z = 0.0;
-                odom_trans.transform.rotation = odom_quat;
-                // send the transform
-                odom_broadcaster.sendTransform(odom_trans);
+    // next, we'll publish the odometry message over ROS
+    nav_msgs::Odometry odom;
+    odom.header.stamp = currentTime;
+    odom.header.frame_id = "odom";
+    // set the position
+    odom.pose.pose.position.x = simPose[1];
+    odom.pose.pose.position.y = -simPose[0];
+    odom.pose.pose.position.z = 0.0;
+    odom.pose.pose.orientation = odom_quat;
+    // set the velocity
+    odom.child_frame_id = "base_footprint";
+    odom.twist.twist.linear.x = car.getVelocity() * std::cos(simPose[2]);
+    odom.twist.twist.linear.y = car.getVelocity() * std::sin(simPose[2]);
+    odom.twist.twist.angular.z = car.getAngularVelocity();
 
-                // next, we'll publish the odometry message over ROS
-                nav_msgs::Odometry odom;
-                odom.header.stamp = currentTime;
-                odom.header.frame_id = "odom";
-                // set the position
-                odom.pose.pose.position.x = simPose[1];
-                odom.pose.pose.position.y = -simPose[0];
-                odom.pose.pose.position.z = 0.0;
-                odom.pose.pose.orientation = odom_quat;
-                // set the velocity
-                odom.child_frame_id = "base_footprint";
-                odom.twist.twist.linear.x = car.getVelocity()*std::cos(simPose[2]);
-                odom.twist.twist.linear.y = car.getVelocity()*std::sin(simPose[2]);
-                odom.twist.twist.angular.z = car.getAngularVelocity();
+    // publish the messages
+    odomPub.publish(odom);
 
-                // Send Telemetry
-                telemetry.header.stamp = currentTime;
-                telemetry.steering = car.getSteering();
-                //telemetry.speed = car.getSpeed();
-                telemetry.steering_angle = car.getSteeringAngle();
-                telemetry.radial_distance = car.getDistance();
-                telemetry.v_radial = car.getVelocity();
-                telemetry.v_linear.x=car.getVelocity()*std::cos(simPose[2]);
-                telemetry.v_linear.y=car.getVelocity()*std::sin(simPose[2]);
-                telemetry.v_angular.z=car.getAngularVelocity();
+    ros::spinOnce();
+    loop_rate.sleep();
+  }
 
-                // publish the messages
-                odomPub.publish(odom);
-                telemetryPub.publish(telemetry);
-
-                ros::spinOnce();
-                loop_rate.sleep();
-        }
-
-        ros::spin();
+  ros::spin();
 }

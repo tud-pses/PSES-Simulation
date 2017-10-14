@@ -10,8 +10,8 @@
 #include <sensor_msgs/Range.h>
 #include <yaml-cpp/yaml.h>
 #include <dynamic_reconfigure/server.h>
-#include <simulation/RangeSensorConfig.h>
-#include <RangeSensor.h>
+#include <pses_simulation//RangeSensorConfig.h>
+#include <pses_simulation/RangeSensor.h>
 
 typedef std::shared_ptr<sensor_msgs::LaserScan> scan_msg_ptr;
 typedef std::shared_ptr<geometry_msgs::Pose> pose_msg_ptr;
@@ -85,7 +85,7 @@ void getPositionInfo(const std::string& base_frame, const std::string& target_fr
         }
 }
 
-void configCallback(simulation::RangeSensorConfig& config, uint32_t level, rs::RangeSensor* sensor, simulation::RangeSensorConfig* dynConfig)
+void configCallback(pses_simulation::RangeSensorConfig& config, uint32_t level, rs::RangeSensor* sensor, pses_simulation::RangeSensorConfig* dynConfig)
 {
         sensor->setConfig(config);
         *dynConfig = config;
@@ -98,9 +98,9 @@ int main(int argc, char **argv){
         ros::NodeHandle nh;
 
         // create dynamic reconfigure object
-        dynamic_reconfigure::Server<simulation::RangeSensorConfig> server;
-        dynamic_reconfigure::Server<simulation::RangeSensorConfig>::CallbackType f;
-        simulation::RangeSensorConfig dynConfig;
+        dynamic_reconfigure::Server<pses_simulation::RangeSensorConfig> server;
+        dynamic_reconfigure::Server<pses_simulation::RangeSensorConfig>::CallbackType f;
+        pses_simulation::RangeSensorConfig dynConfig;
 
         ros::Publisher scanPub = nh.advertise<sensor_msgs::LaserScan>("scan", 10);
 
@@ -108,7 +108,7 @@ int main(int argc, char **argv){
 
         // get "god" map meta info
         nav_msgs::MapMetaData mapInfo;
-        std::string imgMetaPath = ros::package::getPath("simulation") + "/data/map/map.yaml";
+        std::string imgMetaPath = ros::package::getPath("pses_simulation") + "/data/map/map.yaml";
         YAML::Node imgMetaInfo = YAML::LoadFile(imgMetaPath);
         double resolution = imgMetaInfo["resolution"].as<double>();
         geometry_msgs::Pose origin = imgMetaInfo["origin"].as<geometry_msgs::Pose>();
@@ -116,7 +116,7 @@ int main(int argc, char **argv){
         mapInfo.resolution = resolution;
 
         // get "god" map
-        std::string imagePath = ros::package::getPath("simulation") + "/data/map/map.pgm";
+        std::string imagePath = ros::package::getPath("pses_simulation") + "/data/map/map.pgm";
         cv::Mat map = cv::imread(imagePath,1);
         cv::cvtColor(map, map, CV_RGB2GRAY);
 

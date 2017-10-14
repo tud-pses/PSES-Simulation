@@ -5,7 +5,7 @@
  *      Author: Basti
  */
 
-#include "ForwardKinematics.h"
+#include <pses_simulation/ForwardKinematics.h>
 
 ForwardKinematics::ForwardKinematics() : k(0.0){
 								init();

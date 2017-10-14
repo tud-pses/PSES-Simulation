@@ -1,5 +1,5 @@
 #include <ros/ros.h>
-#include <opencv2/opencv.hpp>
+#include <opencv/cv.hpp>
 #include <nav_msgs/MapMetaData.h>
 #include <nav_msgs/OccupancyGrid.h>
 #include <geometry_msgs/Pose.h>
@@ -9,8 +9,6 @@
 #include <ros/package.h>
 #include <yaml-cpp/yaml.h>
 #include <fstream>
-#include <simulation/telemetry_msg.h>
-#include <automap/automap_ctrl_msg.h>
 
 static const double NSEC_PER_SEC = 1000000000.0;
 
@@ -18,16 +16,8 @@ void mapMetaCallback(const nav_msgs::MapMetaData::ConstPtr& metaMsg, nav_msgs::M
         *meta = *metaMsg;
 }
 
-void ctrlCallback(const automap::automap_ctrl_msg::ConstPtr& ctrlMsg, automap::automap_ctrl_msg* ctrlSignals){
-        *ctrlSignals = *ctrlMsg;
-}
-
 void mapCallback(const nav_msgs::OccupancyGrid::ConstPtr& mapMsg, nav_msgs::OccupancyGrid *map){
         *map = *mapMsg;
-}
-
-void telemetryCallback(const simulation::telemetry_msg::ConstPtr& tele, simulation::telemetry_msg* telemetry){
-        *telemetry = *tele;
 }
 
 cv::Mat occupancyGridToImage(const nav_msgs::OccupancyGrid& grid){
@@ -113,10 +103,10 @@ int main(int argc, char **argv){
         nav_msgs::OccupancyGrid grid;
         //cv::Mat map;
 
-        simulation::telemetry_msg telemetry;
+        //simulation::telemetry_msg telemetry;
 
         // ctrl signals used for termination
-        automap::automap_ctrl_msg ctrlSignals;
+        //automap::automap_ctrl_msg ctrlSignals;
 
         tf::TransformListener listener;
         geometry_msgs::Pose position;
@@ -124,9 +114,9 @@ int main(int argc, char **argv){
         cv::Point gridPose;
 
         ros::Subscriber mapMetaSub = nh.subscribe<nav_msgs::MapMetaData>("map_metadata", 10, boost::bind(mapMetaCallback, _1, &mapMetaData));
-        ros::Subscriber ctrlSub = nh.subscribe<automap::automap_ctrl_msg>("automap/ctrl_msg", 10, boost::bind(ctrlCallback, _1, &ctrlSignals));
+        //ros::Subscriber ctrlSub = nh.subscribe<automap::automap_ctrl_msg>("automap/ctrl_msg", 10, boost::bind(ctrlCallback, _1, &ctrlSignals));
         ros::Subscriber mapSub = nh.subscribe<nav_msgs::OccupancyGrid>("map", 10, boost::bind(mapCallback, _1, &grid));
-        ros::Subscriber robotInfo = nh.subscribe<simulation::telemetry_msg>("telemetry", 10, boost::bind(telemetryCallback, _1, &telemetry));
+        //ros::Subscriber robotInfo = nh.subscribe<simulation::telemetry_msg>("telemetry", 10, boost::bind(telemetryCallback, _1, &telemetry));
 
         //wait for map - server
         ros::Duration d = ros::Duration(2, 0);
@@ -147,11 +137,11 @@ int main(int argc, char **argv){
         std::vector<cv::Point> explorationPath;
 
         // use onle this signal for termination
-        ctrlSignals.control_On=false;
+        //ctrlSignals.control_On=false;
 
         // Loop starts here:
         ros::Rate loop_rate(5);
-        while(ros::ok() && !ctrlSignals.control_On) {
+        while(ros::ok() && false) {
 
                 //Get Position Information...
                 getPositionInfo("map", "base_footprint", listener, &position, &rpy);
@@ -162,13 +152,13 @@ int main(int argc, char **argv){
                 ros::spinOnce();
                 loop_rate.sleep();
         }
-
+        /*
         ROS_INFO("Map exploration finished, aborting loop...");
 
-        std::string imgMetaPath = ros::package::getPath("simulation") + "/data/output/map.yaml";
-        std::string imgStatPath = ros::package::getPath("simulation") + "/data/output/exploration_statistics.txt";
-        std::string imgPath = ros::package::getPath("simulation") + "/data/output/map.pgm";
-        std::string recordedPathPath = ros::package::getPath("simulation") + "/data/output/path.png";
+        std::string imgMetaPath = ros::package::getPath("pses_simulation") + "/data/output/map.yaml";
+        std::string imgStatPath = ros::package::getPath("pses_simulation") + "/data/output/exploration_statistics.txt";
+        std::string imgPath = ros::package::getPath("pses_simulation") + "/data/output/map.pgm";
+        std::string recordedPathPath = ros::package::getPath("pses_simulation") + "/data/output/path.png";
 
         cv::Mat map = occupancyGridToImage(grid);
 
@@ -213,8 +203,8 @@ int main(int argc, char **argv){
         Y_out << YAML::Key << "free_thresh";
         Y_out << YAML::Value << 0.196;
         Y_out << YAML::EndMap;
-
-
+        */
+        /*
         YAML::Emitter Y_out_statistics;
         Y_out_statistics << YAML::BeginMap;
         Y_out_statistics << YAML::Key << "driven distance during exploration(m)";
@@ -223,7 +213,7 @@ int main(int argc, char **argv){
         Y_out_statistics << YAML::Value << (ros::Time::now()-initTime).toNSec()/NSEC_PER_SEC;
 
         // calc quality of map
-        std::string godMapPath = ros::package::getPath("simulation") + "/data/map/map.pgm";
+        std::string godMapPath = ros::package::getPath("pses_simulation") + "/data/map/map.pgm";
         cv::Mat godMap = cv::imread(godMapPath,1);
         cv::cvtColor(godMap, godMap, CV_RGB2GRAY);
         double diffMap = cv::norm(godMap, map, CV_L2);
@@ -231,7 +221,8 @@ int main(int argc, char **argv){
         Y_out_statistics << YAML::Key << "in comparison to god map (L2Norm)";
         Y_out_statistics << YAML::Value << diffMap;
         Y_out_statistics << YAML::EndMap;
-
+         */
+        /*
         std::ofstream outfile_yaml(imgMetaPath);
         try{
                 outfile_yaml<<Y_out.c_str();
@@ -240,7 +231,8 @@ int main(int argc, char **argv){
                 std::cout << "Exception writing .yaml-file: " << ex.what() << std::endl;
         }
         outfile_yaml.close();
-
+        */
+        /*
         std::ofstream outfile_statistics(imgStatPath);
         try{
                 outfile_statistics<<Y_out_statistics.c_str();
@@ -249,7 +241,7 @@ int main(int argc, char **argv){
                 std::cout << "Exception writing .txt-file: " << ex.what() << std::endl;
         }
         outfile_statistics.close();
-
+        */
         ros::shutdown();
 
         ros::spin();

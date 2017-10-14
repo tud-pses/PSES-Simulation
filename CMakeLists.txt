@@ -1,7 +1,5 @@
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
 cmake_minimum_required(VERSION 2.8.3)
-project(simulation)
+project(pses_simulation)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -14,20 +12,13 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   nav_msgs
   sensor_msgs
+  geometry_msgs
   tf
-  message_generation
   dynamic_reconfigure
+  map_server
 )
 find_package(OpenCV REQUIRED)
-#find_package(Qt5 REQUIRED COMPONENTS Core Gui)
-find_package(Qt5Widgets)
-find_package(Qt5Core)
-find_package(Qt5Gui)
 
-set( QT_USE_QTGUI TRUE )
-set( QT_USE_QTOPENGL TRUE )
-set( QT_USE_QTXML TRUE )
-#include(${QT_USE_FILE})
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -62,11 +53,9 @@ set( QT_USE_QTXML TRUE )
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
- add_message_files(
-   FILES
-   ctrl_msg.msg
-   telemetry_msg.msg
- )
+# add_message_files(
+   #FILES
+# )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -83,11 +72,11 @@ set( QT_USE_QTXML TRUE )
 # )
 
 ## Generate added messages and services with any dependencies listed here
- generate_messages(
-   DEPENDENCIES
-   std_msgs
-   geometry_msgs
- )
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs
+#   geometry_msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -120,7 +109,7 @@ set( QT_USE_QTXML TRUE )
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES simulation
-  CATKIN_DEPENDS message_runtime std_msgs geometry_msgs
+#   CATKIN_DEPENDS message_runtime
 )
 
 ###########
@@ -129,21 +118,17 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(include)
-include_directories(include ${catkin_INCLUDE_DIRS})
-include_directories(include ${OpenCV_INCLUDE_DIRS})
-#include_directories(include ${Qt5_INCLUDE_DIRS})
-QT5_WRAP_UI(UIS_HDRS include/Dashboard.ui)
-
+include_directories(include ${OpenCV_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
 
 ## Declare a C++ library
 #add_library(simulation
 #   src/${PROJECT_NAME}/src/simulation_control.cpp
 # )
-add_library(RANGE_SENSOR src/RangeSensor.cpp)
-add_library(CAR_MODEL src/CarModel.cpp)
-add_library(FWD_KINEMATICS src/ForwardKinematics.cpp)
-add_library(DASH include/Dashboard.cpp ${UIS_HDRS})
+add_library(project_simulation
+  #src/RangeSensor.cpp
+  src/CarModel.cpp
+  src/ForwardKinematics.cpp
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -151,42 +136,39 @@ add_library(DASH include/Dashboard.cpp ${UIS_HDRS})
 # add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(simulation_node src/simulation_control.cpp)
-add_executable(scan_node src/simulation_laserscan.cpp)
-add_executable(usrange_node src/simulation_usscan.cpp)
-add_executable(dashboard_node src/simulation_dashboard.cpp ${UIS_HDRS})
-add_executable(measurements_node src/simulation_measurements.cpp)
+add_executable(simulation src/simulation_control.cpp)
+#add_executable(scan src/simulation_laserscan.cpp)
+#add_executable(usrange src/simulation_usscan.cpp)
+#add_executable(measurements src/simulation_measurements.cpp)
 
 
-add_dependencies(simulation_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
-add_dependencies(simulation_node ${PROJECT_NAME}_gencpp)
-add_dependencies(scan_node ${PROJECT_NAME}_gencfg)
-add_dependencies(usrange_node ${PROJECT_NAME}_gencfg)
-add_dependencies(RANGE_SENSOR ${PROJECT_NAME}_gencfg)
-add_dependencies(DASH ${PROJECT_NAME}_gencpp)
-add_dependencies(measurements_node ${PROJECT_NAME}_gencpp)
+#add_dependencies(simulation_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
+#add_dependencies(simulation_node ${PROJECT_NAME}_gencpp)
+#add_dependencies(usrange_node ${PROJECT_NAME}_gencfg)
+#add_dependencies(DASH ${PROJECT_NAME}_gencpp)
+#add_dependencies(measurements_node ${PROJECT_NAME}_gencpp)
 
+#add_dependencies(scan ${PROJECT_NAME}_gencfg)
+
+#add_dependencies(usrange ${PROJECT_NAME}_gencfg)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 #add_dependencies(simulation_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(simulation_node
-   ${catkin_LIBRARIES} CAR_MODEL FWD_KINEMATICS
- )
- target_link_libraries(scan_node
-   ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp RANGE_SENSOR
- )
- target_link_libraries(usrange_node
-   ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp RANGE_SENSOR
- )
- target_link_libraries(measurements_node
-   ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp
- )
-#target_link_libraries(dashboard_node ${catkin_LIBRARIES} ${Qt5_LIBRARIES} Qt5::Widgets Qt5::Core Qt5::Gui DASH)
-target_link_libraries(DASH Qt5::Widgets Qt5::Core Qt5::Gui)
-target_link_libraries(dashboard_node ${catkin_LIBRARIES} DASH Qt5::Widgets Qt5::Core Qt5::Gui)
+target_link_libraries(simulation
+  ${catkin_LIBRARIES} project_simulation
+)
+#target_link_libraries(scan
+#   ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp project_simulation
+# )
+# target_link_libraries(usrange
+#   ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp project_simulation
+# )
+# target_link_libraries(measurements
+#   ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp project_simulation
+# )
 
 #############
 ## Install ##

@@ -5,7 +5,7 @@
  *      Author: Basti
  */
 
-#include "CarModel.h"
+#include <pses_simulation/CarModel.h>
 
 CarModel::CarModel(const double dAxis, const ros::Time& time) : lastUpdate(time) {
 								// init kinematic model
