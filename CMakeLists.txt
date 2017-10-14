@@ -121,9 +121,6 @@ catkin_package(
 include_directories(include ${OpenCV_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
 
 ## Declare a C++ library
-#add_library(simulation
-#   src/${PROJECT_NAME}/src/simulation_control.cpp
-# )
 add_library(project_simulation
   src/RangeSensor.cpp
   src/CarModel.cpp
@@ -139,18 +136,9 @@ add_library(project_simulation
 add_executable(odom_sim src/simulation_odom.cpp)
 add_executable(laser_sim src/simulation_laser.cpp)
 add_executable(us_sim src/simulation_us.cpp)
-#add_executable(measurements src/simulation_measurements.cpp)
 
-
-#add_dependencies(simulation_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
-#add_dependencies(simulation_node ${PROJECT_NAME}_gencpp)
-#add_dependencies(usrange_node ${PROJECT_NAME}_gencfg)
-#add_dependencies(DASH ${PROJECT_NAME}_gencpp)
-#add_dependencies(measurements_node ${PROJECT_NAME}_gencpp)
-
-#add_dependencies(scan ${PROJECT_NAME}_gencfg)
-
-#add_dependencies(usrange ${PROJECT_NAME}_gencfg)
+add_dependencies(us_sim ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
+add_dependencies(laser_sim ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -158,25 +146,27 @@ add_executable(us_sim src/simulation_us.cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(odom_sim
-  ${catkin_LIBRARIES} project_simulation
+  ${catkin_LIBRARIES}
+  project_simulation
 )
-#target_link_libraries(scan
-#   ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp project_simulation
-# )
+
 target_link_libraries(project_simulation
-  ${catkin_LIBRARIES} ${OpenCV_LIBS} project_simulation
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBS}
+  project_simulation
 )
 
 target_link_libraries(us_sim
-  ${catkin_LIBRARIES} yaml-cpp project_simulation
+  ${catkin_LIBRARIES}
+  yaml-cpp
+  project_simulation
 )
 
 target_link_libraries(laser_sim
-  ${catkin_LIBRARIES} yaml-cpp project_simulation
+  ${catkin_LIBRARIES}
+  yaml-cpp
+  project_simulation
 )
-# target_link_libraries(measurements
-#   ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp project_simulation
-# )
 
 #############
 ## Install ##
