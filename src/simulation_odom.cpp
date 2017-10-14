@@ -29,9 +29,9 @@ static const std::string DEFAULT_IMU_TOPIC = "/uc_bridge/imu";
 
 void fetchWheelBase(ros::NodeHandle* nh, double& wheelBase)
 {
-  if (nh->hasParam("pses_simulation/wheel_base"))
+  if (nh->hasParam("odom_sim/wheel_base"))
   {
-    nh->getParam("pses_simulation/wheel_base", wheelBase);
+    nh->getParam("odom_sim/wheel_base", wheelBase);
   }
   else
   {
@@ -41,9 +41,9 @@ void fetchWheelBase(ros::NodeHandle* nh, double& wheelBase)
 
 void fetchLoopRate(ros::NodeHandle* nh, double& loopRate)
 {
-  if (nh->hasParam("pses_simulation/loop_rate"))
+  if (nh->hasParam("odom_sim/loop_rate_control"))
   {
-    nh->getParam("pses_simulation/loop_rate", loopRate);
+    nh->getParam("odom_sim/loop_rate_control", loopRate);
   }
   else
   {
@@ -53,9 +53,9 @@ void fetchLoopRate(ros::NodeHandle* nh, double& loopRate)
 
 void fetchOdomFrameID(ros::NodeHandle* nh, std::string& odomFrameID)
 {
-  if (nh->hasParam("pses_simulation/odom_frame_id"))
+  if (nh->hasParam("odom_sim/odom_frame_id"))
   {
-    nh->getParam("pses_simulation/odom_frame_id", odomFrameID);
+    nh->getParam("odom_sim/odom_frame_id", odomFrameID);
   }
   else
   {
@@ -65,9 +65,9 @@ void fetchOdomFrameID(ros::NodeHandle* nh, std::string& odomFrameID)
 
 void fetchOdomChildFrameID(ros::NodeHandle* nh, std::string& odomChildFrameID)
 {
-  if (nh->hasParam("pses_simulation/odom_child_frame_id"))
+  if (nh->hasParam("odom_sim/odom_child_frame_id"))
   {
-    nh->getParam("pses_simulation/odom_child_frame_id", odomChildFrameID);
+    nh->getParam("odom_sim/odom_child_frame_id", odomChildFrameID);
   }
   else
   {
@@ -78,9 +78,9 @@ void fetchOdomChildFrameID(ros::NodeHandle* nh, std::string& odomChildFrameID)
 void fetchMotionCommandTopic(ros::NodeHandle* nh,
                              std::string& motionCommandTopic)
 {
-  if (nh->hasParam("pses_simulation/motion_command_topic"))
+  if (nh->hasParam("odom_sim/motion_command_topic"))
   {
-    nh->getParam("pses_simulation/motion_command_topic", motionCommandTopic);
+    nh->getParam("odom_sim/motion_command_topic", motionCommandTopic);
   }
   else
   {
@@ -91,9 +91,9 @@ void fetchMotionCommandTopic(ros::NodeHandle* nh,
 void fetchSteeringCommandTopic(ros::NodeHandle* nh,
                                std::string& steeringCommandTopic)
 {
-  if (nh->hasParam("pses_simulation/steering_command_topic"))
+  if (nh->hasParam("odom_sim/steering_command_topic"))
   {
-    nh->getParam("pses_simulation/steering_command_topic",
+    nh->getParam("odom_sim/steering_command_topic",
                  steeringCommandTopic);
   }
   else
@@ -104,9 +104,9 @@ void fetchSteeringCommandTopic(ros::NodeHandle* nh,
 
 void fetchMotorCommandTopic(ros::NodeHandle* nh, std::string& motorCommandTopic)
 {
-  if (nh->hasParam("pses_simulation/motor_command_topic"))
+  if (nh->hasParam("odom_sim/motor_command_topic"))
   {
-    nh->getParam("pses_simulation/motor_command_topic", motorCommandTopic);
+    nh->getParam("odom_sim/motor_command_topic", motorCommandTopic);
   }
   else
   {
@@ -116,9 +116,9 @@ void fetchMotorCommandTopic(ros::NodeHandle* nh, std::string& motorCommandTopic)
 
 void fetchOdomTopic(ros::NodeHandle* nh, std::string& odomTopic)
 {
-  if (nh->hasParam("pses_simulation/odom_topic"))
+  if (nh->hasParam("odom_sim/odom_topic"))
   {
-    nh->getParam("pses_simulation/odom_topic", odomTopic);
+    nh->getParam("odom_sim/odom_topic", odomTopic);
   }
   else
   {
@@ -127,9 +127,9 @@ void fetchOdomTopic(ros::NodeHandle* nh, std::string& odomTopic)
 }
 
 void fetchImuTopic(ros::NodeHandle* nh, std::string& imuTopic){
-  if (nh->hasParam("pses_simulation/imu_topic"))
+  if (nh->hasParam("odom_sim/imu_topic"))
   {
-    nh->getParam("pses_simulation/imu_topic", imuTopic);
+    nh->getParam("odom_sim/imu_topic", imuTopic);
   }
   else
   {

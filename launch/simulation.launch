@@ -10,9 +10,9 @@
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
 	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
 	<!-- Run the necessary nodes to bring up the car -->
-        <node pkg="pses_simulation" type="simulation" name="simulation" output="screen"/>
-        <node pkg="pses_simulation" type="usrange" name="usrange" output="screen"/>
-        <node pkg="pses_simulation" type="laserrange" name="laserrange" output="screen"/>
+        <node pkg="pses_simulation" type="odom_sim" name="odom_sim" output="screen"/>
+        <node pkg="pses_simulation" type="us_sim" name="us_sim" output="screen"/>
+        <node pkg="pses_simulation" type="laser_sim" name="laser_sim" output="screen"/>
 	<!-- Run the map server -->
         <node name="map_server" pkg="map_server" type="map_server" args="$(find pses_simulation)/data/map/map.yaml"/>
 

@@ -11,9 +11,6 @@
 #include <dynamic_reconfigure/server.h>
 #include <pses_simulation/RangeSensorConfig.h>
 
-typedef std::shared_ptr<sensor_msgs::Range> scan_msg_ptr;
-typedef std::shared_ptr<geometry_msgs::Pose> pose_msg_ptr;
-
 namespace YAML {
 template<>
 struct convert<geometry_msgs::Pose> {
@@ -37,6 +34,11 @@ struct convert<geometry_msgs::Pose> {
         }
 };
 }
+
+namespace usscan {
+
+typedef std::shared_ptr<sensor_msgs::Range> scan_msg_ptr;
+typedef std::shared_ptr<geometry_msgs::Pose> pose_msg_ptr;
 
 cv::Point setGridPosition(geometry_msgs::Pose& sensor, nav_msgs::MapMetaData& mapInfo){
         unsigned int grid_x = (unsigned int)((sensor.position.x - mapInfo.origin.position.x) / mapInfo.resolution);
@@ -91,33 +93,183 @@ void configCallback(pses_simulation::RangeSensorConfig& config, uint32_t level, 
         ROS_DEBUG("Config was set");
 }
 
+static const double DEFAULT_LOOP_RATE = 30.0;
+static const std::string DEFAULT_US_RIGHT_TOPIC = "/uc_bridge/usr";
+static const std::string DEFAULT_US_FRONT_TOPIC = "/uc_bridge/usf";
+static const std::string DEFAULT_US_LEFT_TOPIC = "/uc_bridge/usl";
+static const std::string DEFAULT_MAP_LOCATION =
+    ros::package::getPath("pses_simulation") + "/data/map/map.pgm";
+static const std::string DEFAULT_MAP_METADATA_LOCATION =
+    ros::package::getPath("pses_simulation") + "/data/map/map.yaml";
+static const std::string DEFAULT_US_RIGHT_FRAME_ID = "right_sensor";
+static const std::string DEFAULT_US_FRONT_FRAME_ID = "front_sensor";
+static const std::string DEFAULT_US_LEFT_FRAME_ID = "left_sensor";
+static const std::string DEFAULT_MAP_FRAME_ID = "map";
+
+void fetchLoopRate(ros::NodeHandle* nh, double& loopRate)
+{
+  if (nh->hasParam("us_sim/loop_rate_laserscan"))
+  {
+    nh->getParam("us_sim/loop_rate_laserscan", loopRate);
+  }
+  else
+  {
+    loopRate = DEFAULT_LOOP_RATE;
+  }
+}
+
+void fetchUSRTopic(ros::NodeHandle* nh, std::string& usrTopic)
+{
+  if (nh->hasParam("us_sim/us_right_topic"))
+  {
+    nh->getParam("us_sim/us_right_topic", usrTopic);
+  }
+  else
+  {
+    usrTopic = DEFAULT_US_RIGHT_TOPIC;
+  }
+}
+
+void fetchUSFTopic(ros::NodeHandle* nh, std::string& usfTopic)
+{
+  if (nh->hasParam("us_sim/us_front_topic"))
+  {
+    nh->getParam("us_sim/us_front_topic", usfTopic);
+  }
+  else
+  {
+    usfTopic = DEFAULT_US_FRONT_TOPIC;
+  }
+}
+
+void fetchUSLTopic(ros::NodeHandle* nh, std::string& uslTopic)
+{
+  if (nh->hasParam("us_sim/us_left_topic"))
+  {
+    nh->getParam("us_sim/us_left_topic", uslTopic);
+  }
+  else
+  {
+    uslTopic = DEFAULT_US_LEFT_TOPIC;
+  }
+}
+
+void fetchMapLocation(ros::NodeHandle* nh, std::string& mapLocation)
+{
+  if (nh->hasParam("us_sim/map_location"))
+  {
+    nh->getParam("us_sim/map_location", mapLocation);
+  }
+  else
+  {
+    mapLocation = DEFAULT_MAP_LOCATION;
+  }
+}
+
+void fetchMapMetadataLocation(ros::NodeHandle* nh,
+                              std::string& mapMetadataLocation)
+{
+  if (nh->hasParam("us_sim/map_metadata_location"))
+  {
+    nh->getParam("us_sim/map_metadata_location", mapMetadataLocation);
+  }
+  else
+  {
+    mapMetadataLocation = DEFAULT_MAP_METADATA_LOCATION;
+  }
+}
+
+void fetchUSRFrameID(ros::NodeHandle* nh, std::string& usrFrameID)
+{
+  if (nh->hasParam("us_sim/us_right_frame_id"))
+  {
+    nh->getParam("us_sim/us_right_frame_id", usrFrameID);
+  }
+  else
+  {
+    usrFrameID = DEFAULT_US_RIGHT_FRAME_ID;
+  }
+}
+
+void fetchUSFFrameID(ros::NodeHandle* nh, std::string& usfFrameID)
+{
+  if (nh->hasParam("us_sim/us_front_frame_id"))
+  {
+    nh->getParam("us_sim/us_front_frame_id", usfFrameID);
+  }
+  else
+  {
+    usfFrameID = DEFAULT_US_FRONT_FRAME_ID;
+  }
+}
+
+void fetchUSLFrameID(ros::NodeHandle* nh, std::string& uslFrameID)
+{
+  if (nh->hasParam("us_sim/us_left_frame_id"))
+  {
+    nh->getParam("us_sim/us_left_frame_id", uslFrameID);
+  }
+  else
+  {
+    uslFrameID = DEFAULT_US_LEFT_FRAME_ID;
+  }
+}
+
+void fetchMapFrameID(ros::NodeHandle* nh, std::string& mapFrameID)
+{
+  if (nh->hasParam("us_sim/map_frame_id"))
+  {
+    nh->getParam("us_sim/map_frame_id", mapFrameID);
+  }
+  else
+  {
+    mapFrameID = DEFAULT_MAP_FRAME_ID;
+  }
+}
+
+}
+
+using namespace usscan;
+
 int main(int argc, char **argv){
 
         ros::init(argc, argv, "simulation_usscan");
         ros::NodeHandle nh;
+        double loopRate;
+        std::string usrTopic, usfTopic, uslTopic, mapLocation, mapMetadataLocation,
+            usrFrameID, usfFrameID, uslFrameID, mapFrameID;
+
+        fetchLoopRate(&nh, loopRate);
+        fetchUSRTopic(&nh, usrTopic);
+        fetchUSFTopic(&nh, usfTopic);
+        fetchUSLTopic(&nh, uslTopic);
+        fetchMapLocation(&nh, mapLocation);
+        fetchMapMetadataLocation(&nh, mapMetadataLocation);
+        fetchUSRFrameID(&nh, usrFrameID);
+        fetchUSFFrameID(&nh, usfFrameID);
+        fetchUSLFrameID(&nh, uslFrameID);
+        fetchMapFrameID(&nh, mapFrameID);
 
         dynamic_reconfigure::Server<pses_simulation::RangeSensorConfig> server;
         dynamic_reconfigure::Server<pses_simulation::RangeSensorConfig>::CallbackType f;
         pses_simulation::RangeSensorConfig dynConfig;
 
-        ros::Publisher front_us_range = nh.advertise<sensor_msgs::Range>("/uc_bridge/usf", 10);
-        ros::Publisher left_us_range = nh.advertise<sensor_msgs::Range>("/uc_bridge/usl", 10);
-        ros::Publisher right_us_range = nh.advertise<sensor_msgs::Range>("/uc_bridge/usr", 10);
+        ros::Publisher front_us_range = nh.advertise<sensor_msgs::Range>(usfTopic, 10);
+        ros::Publisher left_us_range = nh.advertise<sensor_msgs::Range>(uslTopic, 10);
+        ros::Publisher right_us_range = nh.advertise<sensor_msgs::Range>(usrTopic, 10);
 
         sensor_msgs::Range front_range, left_range, right_range;
 
         // get "god" map meta info
         nav_msgs::MapMetaData mapInfo;
-        std::string imgMetaPath = ros::package::getPath("pses_simulation") + "/data/map/map.yaml";
-        YAML::Node imgMetaInfo = YAML::LoadFile(imgMetaPath);
+        YAML::Node imgMetaInfo = YAML::LoadFile(mapMetadataLocation);
         double resolution = imgMetaInfo["resolution"].as<double>();
         geometry_msgs::Pose origin = imgMetaInfo["origin"].as<geometry_msgs::Pose>();
         mapInfo.origin = origin;
         mapInfo.resolution = resolution;
 
         // get "god" map
-        std::string imagePath = ros::package::getPath("pses_simulation") + "/data/map/map.pgm";
-        cv::Mat map = cv::imread(imagePath,1);
+        cv::Mat map = cv::imread(mapLocation,1);
         cv::cvtColor(map, map, CV_RGB2GRAY);
 
         // create sensor object and link with config object
@@ -136,17 +288,17 @@ int main(int argc, char **argv){
 
         ros::Time currentTime = ros::Time::now();
 
-        front_range.header.frame_id = "front_sensor";
+        front_range.header.frame_id = usfFrameID;
         front_range.radiation_type = 0;
 
-        left_range.header.frame_id = "left_sensor";
+        left_range.header.frame_id = uslFrameID;
         left_range.radiation_type = 0;
 
-        right_range.header.frame_id = "right_sensor";
+        right_range.header.frame_id = usrFrameID;
         right_range.radiation_type = 0;
 
         // Loop starts here:
-        ros::Rate loop_rate(30);
+        ros::Rate loop_rate(loopRate);
         while(ros::ok()) {
                 currentTime = ros::Time::now();
 
@@ -166,17 +318,17 @@ int main(int argc, char **argv){
                 right_range.max_range = dynConfig.us_max_sensor_distance;
 
                 //front sensor
-                getPositionInfo("map", "front_sensor", listener, &position, &rpy);
+                getPositionInfo(mapFrameID, usfFrameID, listener, &position, &rpy);
                 gridPose = setGridPosition(position, mapInfo);
                 front_range.range = rs_sonar.getUSScan(gridPose, rs::radToDeg(rpy[2]));
 
                 //left sensor
-                getPositionInfo("map", "left_sensor", listener, &position, &rpy);
+                getPositionInfo(mapFrameID, uslFrameID, listener, &position, &rpy);
                 gridPose = setGridPosition(position, mapInfo);
                 left_range.range = rs_sonar.getUSScan(gridPose, rs::radToDeg(rpy[2]));
 
                 //right sensor
-                getPositionInfo("map", "right_sensor", listener, &position, &rpy);
+                getPositionInfo(mapFrameID, usrFrameID, listener, &position, &rpy);
                 gridPose = setGridPosition(position, mapInfo);
                 right_range.range = rs_sonar.getUSScan(gridPose, rs::radToDeg(rpy[2]));
 

@@ -136,9 +136,9 @@ add_library(project_simulation
 # add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(simulation src/simulation_control.cpp)
-add_executable(laserrange src/simulation_laserscan.cpp)
-add_executable(usrange src/simulation_usscan.cpp)
+add_executable(odom_sim src/simulation_odom.cpp)
+add_executable(laser_sim src/simulation_laser.cpp)
+add_executable(us_sim src/simulation_us.cpp)
 #add_executable(measurements src/simulation_measurements.cpp)
 
 
@@ -157,7 +157,7 @@ add_executable(usrange src/simulation_usscan.cpp)
 #add_dependencies(simulation_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(simulation
+target_link_libraries(odom_sim
   ${catkin_LIBRARIES} project_simulation
 )
 #target_link_libraries(scan
@@ -167,11 +167,11 @@ target_link_libraries(project_simulation
   ${catkin_LIBRARIES} ${OpenCV_LIBS} project_simulation
 )
 
-target_link_libraries(usrange
+target_link_libraries(us_sim
   ${catkin_LIBRARIES} yaml-cpp project_simulation
 )
 
-target_link_libraries(laserrange
+target_link_libraries(laser_sim
   ${catkin_LIBRARIES} yaml-cpp project_simulation
 )
 # target_link_libraries(measurements
