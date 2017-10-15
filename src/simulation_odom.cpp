@@ -166,10 +166,11 @@ int main(int argc, char** argv)
 
   ros::init(argc, argv, "simulation_control");
   ros::NodeHandle nh;
-
+  // create parameter variables
   double loopRate, wheelBase;
   std::string motionCmdTopic, steeringCmdTopic, motorCmdTopic, odomTopic,
       odomFrameID, odomChildFrameID, imuTopic;
+  // fetch parameters from ros param server
   fetchLoopRate(&nh, loopRate);
   fetchWheelBase(&nh, wheelBase);
   fetchMotionCommandTopic(&nh, motionCmdTopic);
