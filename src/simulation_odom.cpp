@@ -180,7 +180,7 @@ int main(int argc, char** argv)
   fetchOdomFrameID(&nh, odomFrameID);
   fetchOdomChildFrameID(&nh, odomChildFrameID);
   fetchImuTopic(&nh, imuTopic);
-
+  // get current time and configure our car model simulation
   ros::Time currentTime = ros::Time::now();
   CarModel car(wheelBase, currentTime);
 
