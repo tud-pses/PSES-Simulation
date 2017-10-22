@@ -1,6 +1,6 @@
 # PSES Simulation
 
-This ROS-package provides a simple simulation for the kinematic model, the ultra sonic range sensors and the kinect of the pses robot from the Real Time Systems lab at FG Echtzeitsysteme - Tu-Darmstadt. Driving is simulated based on the Ackermann kinematic model (Cars) and does not account for torque, friction or any forces. Sensory information is simulated by scanning for obstacles on a given 2D grid map at the position of the virtual model of the car.
+This ROS-package provides a simple simulation for the kinematic model, the ultra sonic range sensors and the kinect of the pses robot from the Real Time Systems lab at FG Echtzeitsysteme - Tu-Darmstadt. The driving simulation based on the Ackermann kinematic model (Cars) and does not account for torque, friction or any forces. Sensory information is simulated by scanning for obstacles on a given 2D grid map at the position of the virtual model of the car.
 
 ### Prerequisites
 
