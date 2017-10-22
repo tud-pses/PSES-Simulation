@@ -24,7 +24,7 @@ Build the package with catkin_make:
 
 Please feel free to browse our wiki, where you can find instructions on how to use and configure this package.
 
-[Pses_Dashboard Wiki](https://github.com/tud-pses/pses_simulation/wiki)
+[Pses_Simulation Wiki](https://github.com/tud-pses/pses_simulation/wiki)
 
 If you're looking for a documentation on the code base, please follow this link:
 
