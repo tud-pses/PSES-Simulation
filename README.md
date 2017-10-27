@@ -16,6 +16,10 @@ Clone the repo into your ROS src folder:
 
 `cd ..`
 
+If not previously installed, install the map_server ros package:
+
+`sudo apt-get install ros-kinect-map-server`
+
 Build the package with catkin_make:
 
 `catkin_make`
@@ -26,9 +30,9 @@ Please feel free to browse our wiki, where you can find instructions on how to u
 
 [Pses_Simulation Wiki](https://github.com/tud-pses/pses_simulation/wiki)
 
-If you're looking for a documentation on the code base, please follow this link:
+If you're looking for a documentation of the code, please follow this link:
 
-[C++ API](https://tud-pses.github.io/pses_simulation/)
+[C++ documentation](https://tud-pses.github.io/pses_simulation/)
 
 ## Authors
 
