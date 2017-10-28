@@ -1,3 +1,9 @@
+/**
+ * @file "simulation_laser.cpp"
+ * @brief Implementation simulation_laser ros node.
+ *
+*/
+
 #include <ros/ros.h>
 #include <ros/package.h>
 #include <geometry_msgs/TransformStamped.h>
@@ -12,10 +18,23 @@
 #include <pses_simulation/RangeSensorConfig.h>
 #include <pses_simulation/RangeSensor.h>
 
+/**
+ * @namespace YAML
+ * @brief This namespace contains special functionality to parse from .yaml
+ * files or write to .yaml files.
+*/
 namespace YAML
 {
+/**
+ * @brief Functor to decode/encode a YAML::Node
+*/
 template <> struct convert<geometry_msgs::Pose>
 {
+  /**
+   * @brief Encodes a pose message to YAML::Node containing x,y,z variables.
+   * @param[in] rhs input pose message
+   * @returns encoded YAML::Node
+  */
   static Node encode(const geometry_msgs::Pose& rhs)
   {
     Node node;
@@ -24,7 +43,13 @@ template <> struct convert<geometry_msgs::Pose>
     node.push_back(rhs.position.z);
     return node;
   }
-
+  /**
+   * @brief Decodes a YAML::Node containing x,y,z variables to a pose message.
+   * @param[in] node input YAML::Node
+   * @param[out] rhs output pose message
+   * @returns true if successful, else false
+   * @throws std::exception
+  */
   static bool decode(const Node& node, geometry_msgs::Pose& rhs)
   {
     if (!node.IsSequence() || node.size() != 3)
@@ -40,12 +65,30 @@ template <> struct convert<geometry_msgs::Pose>
 };
 }
 
+/**
+ * @namespace laserscan
+ * @brief This namespace groups all typedefs, utility functions and parameter
+ * getter used in the simulation_laser node
+*/
 namespace laserscan
 {
-
+/**
+ * @typedef laserscan::scan_msg_ptr
+ * @brief shortcut for a pointer to a laser scan message
+*/
 typedef std::shared_ptr<sensor_msgs::LaserScan> scan_msg_ptr;
+/**
+ * @typedef laserscan::pose_msg_ptr
+ * @brief shortcut for a pointer to a pose message
+*/
 typedef std::shared_ptr<geometry_msgs::Pose> pose_msg_ptr;
 
+/**
+ * @brief Calculate the occupancy grid postion of a given pose.
+ * @param[in] laser pose message of the sensor
+ * @param[in] mapInfo occupancy grid meta information
+ * @return a point in image coordinates
+*/
 cv::Point setGridPosition(geometry_msgs::Pose& laser,
                           nav_msgs::MapMetaData& mapInfo)
 {
@@ -57,7 +100,15 @@ cv::Point setGridPosition(geometry_msgs::Pose& laser,
                      mapInfo.resolution);
   return cv::Point(grid_x, grid_y);
 }
-
+/**
+ * @brief Get the current postion of a sensor from the tf transformation
+ * service.
+ * @param[in] base_frame frame id of the map coordinate system
+ * @param[in] target_frame frame id of the sensor coordinate system
+ * @param[in] listener tf transformation service
+ * @param[out] position current position of the sensor
+ * @param[out] rpy current orientation of the sensor (0: roll, 1:pitch, 2:yaw)
+*/
 void getPositionInfo(const std::string& base_frame,
                      const std::string& target_frame,
                      const tf::TransformListener& listener,
@@ -104,7 +155,14 @@ void getPositionInfo(const std::string& base_frame,
     }
   }
 }
-
+/**
+ * @brief Sets the RangeSensorConfig object of this sensor simulation.
+ * @param[in] config dynamic reconfigure object to reconfigure this sensor
+ * @param[in] level unused
+ * @param[in] sensor current sensor simulation
+ * @param[out] dynConfig dynamic reconfigure object to reconfigure this sensor
+ *
+*/
 void configCallback(pses_simulation::RangeSensorConfig& config, uint32_t level,
                     rs::RangeSensor* sensor,
                     pses_simulation::RangeSensorConfig* dynConfig)
@@ -114,15 +172,27 @@ void configCallback(pses_simulation::RangeSensorConfig& config, uint32_t level,
   ROS_DEBUG("Config was set");
 }
 
-static const double DEFAULT_LOOP_RATE = 30.0;
-static const std::string DEFAULT_LASER_SCAN_TOPIC = "scan";
-static const std::string DEFAULT_MAP_LOCATION =
+static const double DEFAULT_LOOP_RATE =
+    30.0; /**< Frequency of this simulation.*/
+static const std::string DEFAULT_LASER_SCAN_TOPIC =
+    "scan"; /**< Topic to which this node publishes sensor information.*/
+static const std::string
+    DEFAULT_MAP_LOCATION = /**< Path to the occupancy grid file (map)*/
     ros::package::getPath("pses_simulation") + "/data/map/map.pgm";
-static const std::string DEFAULT_MAP_METADATA_LOCATION =
+static const std::string
+    DEFAULT_MAP_METADATA_LOCATION = /**< Path to the occupancy grid meta data
+                                       file*/
     ros::package::getPath("pses_simulation") + "/data/map/map.yaml";
-static const std::string DEFAULT_LASERSCAN_FRAME_ID = "scan";
-static const std::string DEFAULT_MAP_FRAME_ID = "map";
+static const std::string DEFAULT_LASERSCAN_FRAME_ID =
+    "scan"; /**< Coordinate system id of this sensor*/
+static const std::string DEFAULT_MAP_FRAME_ID =
+    "map"; /**< Coordinate system id of the map*/
 
+/**
+ * @brief Get loop rate launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] loopRate loop rate in Hz
+*/
 void fetchLoopRate(ros::NodeHandle* nh, double& loopRate)
 {
   if (nh->hasParam("laser_sim/loop_rate_laserscan"))
@@ -134,7 +204,12 @@ void fetchLoopRate(ros::NodeHandle* nh, double& loopRate)
     loopRate = DEFAULT_LOOP_RATE;
   }
 }
-
+/**
+ * @brief Get laser scan topic launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] laserScanTopic topic to which this node publishes sensor
+ * information.
+*/
 void fetchLaserScanTopic(ros::NodeHandle* nh, std::string& laserScanTopic)
 {
   if (nh->hasParam("laser_sim/laser_scan_topic"))
@@ -146,7 +221,11 @@ void fetchLaserScanTopic(ros::NodeHandle* nh, std::string& laserScanTopic)
     laserScanTopic = DEFAULT_LASER_SCAN_TOPIC;
   }
 }
-
+/**
+ * @brief Get map location launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] mapLocation path to the occupancy grid file (map)
+*/
 void fetchMapLocation(ros::NodeHandle* nh, std::string& mapLocation)
 {
   if (nh->hasParam("laser_sim/map_location"))
@@ -158,7 +237,11 @@ void fetchMapLocation(ros::NodeHandle* nh, std::string& mapLocation)
     mapLocation = DEFAULT_MAP_LOCATION;
   }
 }
-
+/**
+ * @brief Get map meta data location launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] mapMetadataLocation path to the map meta data file
+*/
 void fetchMapMetadataLocation(ros::NodeHandle* nh,
                               std::string& mapMetadataLocation)
 {
@@ -171,7 +254,11 @@ void fetchMapMetadataLocation(ros::NodeHandle* nh,
     mapMetadataLocation = DEFAULT_MAP_METADATA_LOCATION;
   }
 }
-
+/**
+ * @brief Get laser scan frame id launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] laserscanFrameID coordinate system id of this sensor
+*/
 void fetchLaserscanFrameID(ros::NodeHandle* nh, std::string& laserscanFrameID)
 {
   if (nh->hasParam("laser_sim/laserscan_frame_id"))
@@ -183,7 +270,11 @@ void fetchLaserscanFrameID(ros::NodeHandle* nh, std::string& laserscanFrameID)
     laserscanFrameID = DEFAULT_LASERSCAN_FRAME_ID;
   }
 }
-
+/**
+ * @brief Get map frame id launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] mapFrameID coordinate system id of the map
+*/
 void fetchMapFrameID(ros::NodeHandle* nh, std::string& mapFrameID)
 {
   if (nh->hasParam("laser_sim/map_frame_id"))
@@ -199,6 +290,9 @@ void fetchMapFrameID(ros::NodeHandle* nh, std::string& mapFrameID)
 
 using namespace laserscan;
 
+/**
+ * @brief Main function of this ros node.
+*/
 int main(int argc, char** argv)
 {
 
@@ -221,7 +315,8 @@ int main(int argc, char** argv)
       f;
   pses_simulation::RangeSensorConfig dynConfig;
 
-  ros::Publisher scanPub = nh.advertise<sensor_msgs::LaserScan>(laserScanTopic, 10);
+  ros::Publisher scanPub =
+      nh.advertise<sensor_msgs::LaserScan>(laserScanTopic, 10);
 
   sensor_msgs::LaserScan scan;
 

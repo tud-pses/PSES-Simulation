@@ -32,24 +32,32 @@
 <div class="title">YAML::convert&lt; geometry_msgs::Pose &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Functor to decode/encode a YAML::Node.  
+ <a href="structYAML_1_1convert_3_01geometry__msgs_1_1Pose_01_4.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae252ab392ad3490558b71ce6f7128a9d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structYAML_1_1convert_3_01geometry__msgs_1_1Pose_01_4.html#ae252ab392ad3490558b71ce6f7128a9d">decode</a> (const Node &amp;node, geometry_msgs::Pose &amp;rhs)</td></tr>
+<tr class="memdesc:ae252ab392ad3490558b71ce6f7128a9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes a YAML::Node containing x,y,z variables to a pose message.  <a href="#ae252ab392ad3490558b71ce6f7128a9d">More...</a><br /></td></tr>
 <tr class="separator:ae252ab392ad3490558b71ce6f7128a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae252ab392ad3490558b71ce6f7128a9d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structYAML_1_1convert_3_01geometry__msgs_1_1Pose_01_4.html#ae252ab392ad3490558b71ce6f7128a9d">decode</a> (const Node &amp;node, geometry_msgs::Pose &amp;rhs)</td></tr>
+<tr class="memdesc:ae252ab392ad3490558b71ce6f7128a9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes a YAML::Node containing x,y,z variables to a pose message.  <a href="#ae252ab392ad3490558b71ce6f7128a9d">More...</a><br /></td></tr>
 <tr class="separator:ae252ab392ad3490558b71ce6f7128a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04149f911c402ec79f82c6819a1bbf53"><td class="memItemLeft" align="right" valign="top">static Node&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structYAML_1_1convert_3_01geometry__msgs_1_1Pose_01_4.html#a04149f911c402ec79f82c6819a1bbf53">encode</a> (const geometry_msgs::Pose &amp;rhs)</td></tr>
+<tr class="memdesc:a04149f911c402ec79f82c6819a1bbf53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes a pose message to YAML::Node containing x,y,z variables.  <a href="#a04149f911c402ec79f82c6819a1bbf53">More...</a><br /></td></tr>
 <tr class="separator:a04149f911c402ec79f82c6819a1bbf53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04149f911c402ec79f82c6819a1bbf53"><td class="memItemLeft" align="right" valign="top">static Node&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structYAML_1_1convert_3_01geometry__msgs_1_1Pose_01_4.html#a04149f911c402ec79f82c6819a1bbf53">encode</a> (const geometry_msgs::Pose &amp;rhs)</td></tr>
+<tr class="memdesc:a04149f911c402ec79f82c6819a1bbf53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes a pose message to YAML::Node containing x,y,z variables.  <a href="#a04149f911c402ec79f82c6819a1bbf53">More...</a><br /></td></tr>
 <tr class="separator:a04149f911c402ec79f82c6819a1bbf53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;&gt;<br />
 struct YAML::convert&lt; geometry_msgs::Pose &gt;</h3>
 
+<p>Functor to decode/encode a YAML::Node. </p>
 
-<p>Definition at line <a class="el" href="simulation__laser_8cpp_source.html#l00017">17</a> of file <a class="el" href="simulation__laser_8cpp_source.html">simulation_laser.cpp</a>.</p>
+<p>Definition at line <a class="el" href="simulation__laser_8cpp_source.html#l00031">31</a> of file <a class="el" href="simulation__laser_8cpp_source.html">simulation_laser.cpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ae252ab392ad3490558b71ce6f7128a9d"></a>
 <div class="memitem">
@@ -83,7 +91,23 @@ struct YAML::convert&lt; geometry_msgs::Pose &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00025">25</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Decodes a YAML::Node containing x,y,z variables to a pose message. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">node</td><td>input YAML::Node </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">rhs</td><td>output pose message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successful, else false </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::exception</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00052">52</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -119,7 +143,23 @@ struct YAML::convert&lt; geometry_msgs::Pose &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__laser_8cpp_source.html#l00028">28</a> of file <a class="el" href="simulation__laser_8cpp_source.html">simulation_laser.cpp</a>.</p>
+<p>Decodes a YAML::Node containing x,y,z variables to a pose message. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">node</td><td>input YAML::Node </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">rhs</td><td>output pose message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successful, else false </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::exception</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__laser_8cpp_source.html#l00053">53</a> of file <a class="el" href="simulation__laser_8cpp_source.html">simulation_laser.cpp</a>.</p>
 
 </div>
 </div>
@@ -145,7 +185,16 @@ struct YAML::convert&lt; geometry_msgs::Pose &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00017">17</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Encodes a pose message to YAML::Node containing x,y,z variables. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">rhs</td><td>input pose message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>encoded YAML::Node </dd></dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00037">37</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -171,7 +220,16 @@ struct YAML::convert&lt; geometry_msgs::Pose &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__laser_8cpp_source.html#l00019">19</a> of file <a class="el" href="simulation__laser_8cpp_source.html">simulation_laser.cpp</a>.</p>
+<p>Encodes a pose message to YAML::Node containing x,y,z variables. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">rhs</td><td>input pose message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>encoded YAML::Node </dd></dl>
+
+<p>Definition at line <a class="el" href="simulation__laser_8cpp_source.html#l00038">38</a> of file <a class="el" href="simulation__laser_8cpp_source.html">simulation_laser.cpp</a>.</p>
 
 </div>
 </div>
@@ -185,7 +243,7 @@ struct YAML::convert&lt; geometry_msgs::Pose &gt;</h3>
 <hr size="1"><div style="align: right;">
 <a href="https://github.com/tud-pses/pses_simulation">pses_simulation</a><br />
 Author(s): Sebastian Ehmes <sebastian.ehmes@gmx.de></br />
-<small>autogenerated on Sat Oct 28 2017 00:34:41</small>
+<small>autogenerated on Sat Oct 28 2017 18:41:57</small>
 </div>
 </body>
 </html>

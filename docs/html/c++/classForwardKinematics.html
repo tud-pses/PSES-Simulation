@@ -32,35 +32,51 @@
 </div><!--header-->
 <div class="contents">
 
+<p>The <a class="el" href="classForwardKinematics.html" title="The ForwardKinematics class simulates kinematic behavoir of a car like mobile platform given its curr...">ForwardKinematics</a> class simulates kinematic behavoir of a car like mobile platform given its current control parameters (e.g. steering, speed etc.)  
+ <a href="classForwardKinematics.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4b4dbd7eb41e03a49daced2f75a29447"><td class="memItemLeft" align="right" valign="top">std::pair&lt; double, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#a4b4dbd7eb41e03a49daced2f75a29447">calcICC</a> (double alpha)</td></tr>
+<tr class="memdesc:a4b4dbd7eb41e03a49daced2f75a29447"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the current instantaneous center of curvature given a steering angle.  <a href="#a4b4dbd7eb41e03a49daced2f75a29447">More...</a><br /></td></tr>
 <tr class="separator:a4b4dbd7eb41e03a49daced2f75a29447"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f376368c0edac4c8643290c76d6d51c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#a1f376368c0edac4c8643290c76d6d51c">calcRadius</a> (std::pair&lt; double, double &gt; ICC)</td></tr>
+<tr class="memdesc:a1f376368c0edac4c8643290c76d6d51c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the radius of the current robot tracjectory around the instantaneous center of curvature (ICC).  <a href="#a1f376368c0edac4c8643290c76d6d51c">More...</a><br /></td></tr>
 <tr class="separator:a1f376368c0edac4c8643290c76d6d51c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec63efb31652c3dbcc7abf18c88c6bd6"><td class="memItemLeft" align="right" valign="top">Eigen::Matrix4d *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#aec63efb31652c3dbcc7abf18c88c6bd6">calcRot</a> (double theta, double alpha)</td></tr>
+<tr class="memdesc:aec63efb31652c3dbcc7abf18c88c6bd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the current rotation matrix.  <a href="#aec63efb31652c3dbcc7abf18c88c6bd6">More...</a><br /></td></tr>
 <tr class="separator:aec63efb31652c3dbcc7abf18c88c6bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affd6693602d8824f788dc218c318f3a5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#affd6693602d8824f788dc218c318f3a5">calcTheta</a> (double distance, double <a class="el" href="classForwardKinematics.html#a668fb0c724553978599009626d891e23">radius</a>)</td></tr>
+<tr class="memdesc:affd6693602d8824f788dc218c318f3a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the current orientation of the robot with respect to the coordinate system of the previous update.  <a href="#affd6693602d8824f788dc218c318f3a5">More...</a><br /></td></tr>
 <tr class="separator:affd6693602d8824f788dc218c318f3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42c931cb0608abdc93298953eb3a0944"><td class="memItemLeft" align="right" valign="top">Eigen::Matrix4d *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#a42c931cb0608abdc93298953eb3a0944">calcTrans</a> (double <a class="el" href="classForwardKinematics.html#a668fb0c724553978599009626d891e23">radius</a>, double distance, double alpha, std::pair&lt; double, double &gt; ICC)</td></tr>
+<tr class="memdesc:a42c931cb0608abdc93298953eb3a0944"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the current translation matrix.  <a href="#a42c931cb0608abdc93298953eb3a0944">More...</a><br /></td></tr>
 <tr class="separator:a42c931cb0608abdc93298953eb3a0944"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06aca8b21eaba02e28b8f749378bddb0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#a06aca8b21eaba02e28b8f749378bddb0">degToRad</a> (double angle)</td></tr>
+<tr class="memdesc:a06aca8b21eaba02e28b8f749378bddb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion from degrees to radiants.  <a href="#a06aca8b21eaba02e28b8f749378bddb0">More...</a><br /></td></tr>
 <tr class="separator:a06aca8b21eaba02e28b8f749378bddb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6983b38f9a665e14849e1ccd57bb39dc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#a6983b38f9a665e14849e1ccd57bb39dc">flattenZeros</a> (double value)</td></tr>
+<tr class="memdesc:a6983b38f9a665e14849e1ccd57bb39dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rounds values close to zero to exactly zero.  <a href="#a6983b38f9a665e14849e1ccd57bb39dc">More...</a><br /></td></tr>
 <tr class="separator:a6983b38f9a665e14849e1ccd57bb39dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff7ff4cb9cf2c523b111f2c5f2ec5cc8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#aff7ff4cb9cf2c523b111f2c5f2ec5cc8">ForwardKinematics</a> ()</td></tr>
+<tr class="memdesc:aff7ff4cb9cf2c523b111f2c5f2ec5cc8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classForwardKinematics.html" title="The ForwardKinematics class simulates kinematic behavoir of a car like mobile platform given its curr...">ForwardKinematics</a> default constructor.  <a href="#aff7ff4cb9cf2c523b111f2c5f2ec5cc8">More...</a><br /></td></tr>
 <tr class="separator:aff7ff4cb9cf2c523b111f2c5f2ec5cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a891c83e43576a82a5707398791b23830"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#a891c83e43576a82a5707398791b23830">ForwardKinematics</a> (const <a class="el" href="classForwardKinematics.html">ForwardKinematics</a> &amp;other)</td></tr>
+<tr class="memdesc:a891c83e43576a82a5707398791b23830"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classForwardKinematics.html" title="The ForwardKinematics class simulates kinematic behavoir of a car like mobile platform given its curr...">ForwardKinematics</a> default copy constructor.  <a href="#a891c83e43576a82a5707398791b23830">More...</a><br /></td></tr>
 <tr class="separator:a891c83e43576a82a5707398791b23830"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a2a3fea1542f94b8ed3756385e9dcd3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#a0a2a3fea1542f94b8ed3756385e9dcd3">ForwardKinematics</a> (double <a class="el" href="classForwardKinematics.html#a49209f1c975a3d000429b9b64f852a17">k</a>)</td></tr>
+<tr class="memdesc:a0a2a3fea1542f94b8ed3756385e9dcd3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classForwardKinematics.html" title="The ForwardKinematics class simulates kinematic behavoir of a car like mobile platform given its curr...">ForwardKinematics</a> constructor.  <a href="#a0a2a3fea1542f94b8ed3756385e9dcd3">More...</a><br /></td></tr>
 <tr class="separator:a0a2a3fea1542f94b8ed3756385e9dcd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4f5ab055446b365b111680d9c1a4f37"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#af4f5ab055446b365b111680d9c1a4f37">getRadius</a> () const </td></tr>
+<tr class="memdesc:af4f5ab055446b365b111680d9c1a4f37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the radius of the current robot tracjectory around the instantaneous center of curvature (ICC).  <a href="#af4f5ab055446b365b111680d9c1a4f37">More...</a><br /></td></tr>
 <tr class="separator:af4f5ab055446b365b111680d9c1a4f37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86d272587090c6852afcbc007f96fc00"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#a86d272587090c6852afcbc007f96fc00">getUpdate</a> (double alpha, double distance)</td></tr>
+<tr class="memdesc:a86d272587090c6852afcbc007f96fc00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current position and orientation.  <a href="#a86d272587090c6852afcbc007f96fc00">More...</a><br /></td></tr>
 <tr class="separator:a86d272587090c6852afcbc007f96fc00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a952917a71047b980a69ade0b020744bd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#a952917a71047b980a69ade0b020744bd">radToDeg</a> (double angle)</td></tr>
+<tr class="memdesc:a952917a71047b980a69ade0b020744bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion from radiants to degrees.  <a href="#a952917a71047b980a69ade0b020744bd">More...</a><br /></td></tr>
 <tr class="separator:a952917a71047b980a69ade0b020744bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -71,6 +87,7 @@ Public Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a7dae14671e8c99c8f61b3cff800a0510"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classForwardKinematics.html#a7dae14671e8c99c8f61b3cff800a0510">init</a> ()</td></tr>
+<tr class="memdesc:a7dae14671e8c99c8f61b3cff800a0510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize simulation.  <a href="#a7dae14671e8c99c8f61b3cff800a0510">More...</a><br /></td></tr>
 <tr class="separator:a7dae14671e8c99c8f61b3cff800a0510"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -89,8 +106,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a9a286ae08a4d19368cfc74082bdb6015"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00010">10</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
+<div class="textblock"><p>The <a class="el" href="classForwardKinematics.html" title="The ForwardKinematics class simulates kinematic behavoir of a car like mobile platform given its curr...">ForwardKinematics</a> class simulates kinematic behavoir of a car like mobile platform given its current control parameters (e.g. steering, speed etc.) </p>
+<p>This is not physically accurate simulation of forces, torque and accelerations. Its mainly used to demonstrate kinematic behaviour of car like robot in an ideal environment, i.e. infinite acceleration, zero steering lag and perfect tire grip. </p>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00028">28</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aff7ff4cb9cf2c523b111f2c5f2ec5cc8"></a>
 <div class="memitem">
@@ -105,7 +124,9 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00003">3</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p><a class="el" href="classForwardKinematics.html" title="The ForwardKinematics class simulates kinematic behavoir of a car like mobile platform given its curr...">ForwardKinematics</a> default constructor. </p>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00009">9</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -123,7 +144,9 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00006">6</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p><a class="el" href="classForwardKinematics.html" title="The ForwardKinematics class simulates kinematic behavoir of a car like mobile platform given its curr...">ForwardKinematics</a> default copy constructor. </p>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00010">10</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -141,7 +164,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00015">15</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p><a class="el" href="classForwardKinematics.html" title="The ForwardKinematics class simulates kinematic behavoir of a car like mobile platform given its curr...">ForwardKinematics</a> constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>wheel base of the mobile robot in meters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00021">21</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -160,7 +191,16 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00031">31</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p>Calculates the current instantaneous center of curvature given a steering angle. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td>current steering angle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pair of coordinates of the ICC (first: x, second: y) </dd></dl>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00034">34</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -178,7 +218,16 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00046">46</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p>Calculate the radius of the current robot tracjectory around the instantaneous center of curvature (ICC). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ICC</td><td>pair of coordinates of the ICC (first: x, second: y) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>radius in meters </dd></dl>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00047">47</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -206,7 +255,17 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00053">53</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p>Calculate the current rotation matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">theta</td><td>orientation of the previous update </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td>current steering angle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>current rotation matrix </dd></dl>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00056">56</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -234,7 +293,17 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00050">50</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p>Calculate the current orientation of the robot with respect to the coordinate system of the previous update. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">distance</td><td>distance travelled between updates </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">radius</td><td>radius with respect to the ICC in meters </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>current orientation in radiants </dd></dl>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00052">52</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -274,7 +343,19 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00072">72</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p>Calculate the current translation matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td>current steering angle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">distance</td><td>distance travelled between updates </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">radius</td><td>radius with respect to the ICC in meters </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ICC</td><td>pair of coordinates of the ICC (first: x, second: y) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>current translation matrix </dd></dl>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00078">78</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -292,7 +373,16 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00039">39</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p>Conversion from degrees to radiants. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">angle</td><td>angle in degrees </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>angle in radiants </dd></dl>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00044">44</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -310,7 +400,10 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00036">36</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p>Rounds values close to zero to exactly zero. </p>
+<dl class="section return"><dt>Returns</dt><dd>0 if value &gt; epsilon, else value. </dd></dl>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00040">40</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -327,7 +420,10 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00027">27</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p>Get the radius of the current robot tracjectory around the instantaneous center of curvature (ICC). </p>
+<dl class="section return"><dt>Returns</dt><dd>radius in meters </dd></dl>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00032">32</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -355,7 +451,17 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00104">104</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p>Get the current position and orientation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td>current steering angle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">distance</td><td>distance travelled between updates </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>current Current pose (0: - y-coordinate, 1: x-coordinate, 2: yaw in radiants) </dd></dl>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00117">117</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -380,7 +486,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00019">19</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p>Initialize simulation. </p>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00023">23</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -398,7 +506,16 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00042">42</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
+<p>Conversion from radiants to degrees. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">angle</td><td>angle in radiants </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>angle in degrees </dd></dl>
+
+<p>Definition at line <a class="el" href="ForwardKinematics_8cpp_source.html#l00045">45</a> of file <a class="el" href="ForwardKinematics_8cpp_source.html">ForwardKinematics.cpp</a>.</p>
 
 </div>
 </div>
@@ -420,8 +537,9 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>current Current pose (0: - y-coordinate, 1: x-coordinate, 2: yaw in radiants) </p>
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00033">33</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
+<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00117">117</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
 
 </div>
 </div>
@@ -442,8 +560,9 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Initial forward kinematic transformation matrix </p>
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00030">30</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
+<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00114">114</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
 
 </div>
 </div>
@@ -464,8 +583,9 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Wheelbase in meters </p>
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00028">28</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
+<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00112">112</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
 
 </div>
 </div>
@@ -478,8 +598,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>pi </p>
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00025">25</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
+<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00109">109</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
 
 </div>
 </div>
@@ -500,8 +621,9 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Previous kinematic transformation matrix </p>
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00032">32</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
+<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00116">116</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
 
 </div>
 </div>
@@ -522,8 +644,9 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Radius of the current robot tracjectory around the instantaneous center of curvature (ICC) </p>
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00029">29</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
+<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00113">113</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
 
 </div>
 </div>
@@ -544,8 +667,9 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>History of kinematic transformation matrices </p>
 
-<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00031">31</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
+<p>Definition at line <a class="el" href="ForwardKinematics_8h_source.html#l00115">115</a> of file <a class="el" href="ForwardKinematics_8h_source.html">ForwardKinematics.h</a>.</p>
 
 </div>
 </div>
@@ -559,7 +683,7 @@ Private Attributes</h2></td></tr>
 <hr size="1"><div style="align: right;">
 <a href="https://github.com/tud-pses/pses_simulation">pses_simulation</a><br />
 Author(s): Sebastian Ehmes <sebastian.ehmes@gmx.de></br />
-<small>autogenerated on Sat Oct 28 2017 00:34:41</small>
+<small>autogenerated on Sat Oct 28 2017 18:41:57</small>
 </div>
 </body>
 </html>

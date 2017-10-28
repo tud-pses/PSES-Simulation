@@ -139,6 +139,7 @@ add_executable(us_sim src/simulation_us.cpp)
 
 add_dependencies(us_sim ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
 add_dependencies(laser_sim ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
+add_dependencies(project_simulation ${PROJECT_NAME}_gencfg)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above

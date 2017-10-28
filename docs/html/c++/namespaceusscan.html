@@ -29,41 +29,59 @@
 <div class="title">usscan Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This namespace groups all typedefs, utility functions and parameter getter used in the simulation_us node.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aab963254e2eb93931369ccdd1e0b9764"><td class="memItemLeft" align="right" valign="top">typedef std::shared_ptr&lt; geometry_msgs::Pose &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#aab963254e2eb93931369ccdd1e0b9764">pose_msg_ptr</a></td></tr>
-<tr class="separator:aab963254e2eb93931369ccdd1e0b9764"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a515e943a4c867615e1c4d50864fa3c"><td class="memItemLeft" align="right" valign="top">typedef std::shared_ptr&lt; sensor_msgs::Range &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#a8a515e943a4c867615e1c4d50864fa3c">scan_msg_ptr</a></td></tr>
-<tr class="separator:a8a515e943a4c867615e1c4d50864fa3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fa14e77da16c0162a677c247e6a9ddb"><td class="memItemLeft" align="right" valign="top">typedef std::shared_ptr&lt; geometry_msgs::Pose &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#a7fa14e77da16c0162a677c247e6a9ddb">pose_msg_ptr</a></td></tr>
+<tr class="memdesc:a7fa14e77da16c0162a677c247e6a9ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">shortcut for a pointer to a pose message  <a href="#a7fa14e77da16c0162a677c247e6a9ddb">More...</a><br /></td></tr>
+<tr class="separator:a7fa14e77da16c0162a677c247e6a9ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef8281ab9b68813b162f8b67b0459baf"><td class="memItemLeft" align="right" valign="top">typedef std::shared_ptr&lt; sensor_msgs::Range &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#aef8281ab9b68813b162f8b67b0459baf">scan_msg_ptr</a></td></tr>
+<tr class="memdesc:aef8281ab9b68813b162f8b67b0459baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">shortcut for a pointer to a range message  <a href="#aef8281ab9b68813b162f8b67b0459baf">More...</a><br /></td></tr>
+<tr class="separator:aef8281ab9b68813b162f8b67b0459baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac4487ee8a9c3e900b06726b2213ae36c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#ac4487ee8a9c3e900b06726b2213ae36c">configCallback</a> (pses_simulation::RangeSensorConfig &amp;config, uint32_t level, rs::RangeSensor *sensor, pses_simulation::RangeSensorConfig *dynConfig)</td></tr>
+<tr class="memitem:ac4487ee8a9c3e900b06726b2213ae36c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#ac4487ee8a9c3e900b06726b2213ae36c">configCallback</a> (pses_simulation::RangeSensorConfig &amp;config, uint32_t level, <a class="el" href="classrs_1_1RangeSensor.html">rs::RangeSensor</a> *sensor, pses_simulation::RangeSensorConfig *dynConfig)</td></tr>
+<tr class="memdesc:ac4487ee8a9c3e900b06726b2213ae36c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the RangeSensorConfig object of this sensor simulation.  <a href="#ac4487ee8a9c3e900b06726b2213ae36c">More...</a><br /></td></tr>
 <tr class="separator:ac4487ee8a9c3e900b06726b2213ae36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46105a5981b25b669fc2a0108ab567aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#a46105a5981b25b669fc2a0108ab567aa">fetchLoopRate</a> (ros::NodeHandle *nh, double &amp;loopRate)</td></tr>
+<tr class="memdesc:a46105a5981b25b669fc2a0108ab567aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get loop rate launch parameter.  <a href="#a46105a5981b25b669fc2a0108ab567aa">More...</a><br /></td></tr>
 <tr class="separator:a46105a5981b25b669fc2a0108ab567aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea9bcf3e966af543e9c6575afd3e5efb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#aea9bcf3e966af543e9c6575afd3e5efb">fetchMapFrameID</a> (ros::NodeHandle *nh, std::string &amp;mapFrameID)</td></tr>
+<tr class="memdesc:aea9bcf3e966af543e9c6575afd3e5efb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get map frame id launch parameter.  <a href="#aea9bcf3e966af543e9c6575afd3e5efb">More...</a><br /></td></tr>
 <tr class="separator:aea9bcf3e966af543e9c6575afd3e5efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adec760ec4fd6d2d0102eaae8b669ce81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#adec760ec4fd6d2d0102eaae8b669ce81">fetchMapLocation</a> (ros::NodeHandle *nh, std::string &amp;mapLocation)</td></tr>
+<tr class="memdesc:adec760ec4fd6d2d0102eaae8b669ce81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get map location launch parameter.  <a href="#adec760ec4fd6d2d0102eaae8b669ce81">More...</a><br /></td></tr>
 <tr class="separator:adec760ec4fd6d2d0102eaae8b669ce81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb58dc7bc3421222e8faf72104ee0337"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#aeb58dc7bc3421222e8faf72104ee0337">fetchMapMetadataLocation</a> (ros::NodeHandle *nh, std::string &amp;mapMetadataLocation)</td></tr>
+<tr class="memdesc:aeb58dc7bc3421222e8faf72104ee0337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get map meta data location launch parameter.  <a href="#aeb58dc7bc3421222e8faf72104ee0337">More...</a><br /></td></tr>
 <tr class="separator:aeb58dc7bc3421222e8faf72104ee0337"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12ede0f9246e3ba35274590056c41463"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#a12ede0f9246e3ba35274590056c41463">fetchUSFFrameID</a> (ros::NodeHandle *nh, std::string &amp;usfFrameID)</td></tr>
+<tr class="memdesc:a12ede0f9246e3ba35274590056c41463"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get front ultra sonic sensor frame id launch parameter.  <a href="#a12ede0f9246e3ba35274590056c41463">More...</a><br /></td></tr>
 <tr class="separator:a12ede0f9246e3ba35274590056c41463"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2afc01543fd5b13278e534bcef145ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#af2afc01543fd5b13278e534bcef145ef">fetchUSFTopic</a> (ros::NodeHandle *nh, std::string &amp;usfTopic)</td></tr>
+<tr class="memdesc:af2afc01543fd5b13278e534bcef145ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get front ultra sonic sensor topic launch parameter.  <a href="#af2afc01543fd5b13278e534bcef145ef">More...</a><br /></td></tr>
 <tr class="separator:af2afc01543fd5b13278e534bcef145ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace479e5dab46d39f21929b6f883e444b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#ace479e5dab46d39f21929b6f883e444b">fetchUSLFrameID</a> (ros::NodeHandle *nh, std::string &amp;uslFrameID)</td></tr>
+<tr class="memdesc:ace479e5dab46d39f21929b6f883e444b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get left ultra sonic sensor frame id launch parameter.  <a href="#ace479e5dab46d39f21929b6f883e444b">More...</a><br /></td></tr>
 <tr class="separator:ace479e5dab46d39f21929b6f883e444b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e6392ec09ad77104452aea1bd03c423"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#a2e6392ec09ad77104452aea1bd03c423">fetchUSLTopic</a> (ros::NodeHandle *nh, std::string &amp;uslTopic)</td></tr>
+<tr class="memdesc:a2e6392ec09ad77104452aea1bd03c423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get left ultra sonic sensor topic launch parameter.  <a href="#a2e6392ec09ad77104452aea1bd03c423">More...</a><br /></td></tr>
 <tr class="separator:a2e6392ec09ad77104452aea1bd03c423"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3feb5e61080cae31fdc7076d348696d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#af3feb5e61080cae31fdc7076d348696d">fetchUSRFrameID</a> (ros::NodeHandle *nh, std::string &amp;usrFrameID)</td></tr>
+<tr class="memdesc:af3feb5e61080cae31fdc7076d348696d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get right ultra sonic sensor frame id launch parameter.  <a href="#af3feb5e61080cae31fdc7076d348696d">More...</a><br /></td></tr>
 <tr class="separator:af3feb5e61080cae31fdc7076d348696d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1acf11e443fec0abe8b9c85a2eb5206f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#a1acf11e443fec0abe8b9c85a2eb5206f">fetchUSRTopic</a> (ros::NodeHandle *nh, std::string &amp;usrTopic)</td></tr>
+<tr class="memdesc:a1acf11e443fec0abe8b9c85a2eb5206f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get right ultra sonic sensor topic launch parameter.  <a href="#a1acf11e443fec0abe8b9c85a2eb5206f">More...</a><br /></td></tr>
 <tr class="separator:a1acf11e443fec0abe8b9c85a2eb5206f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b884f54710b4d6308ba95ba0d899d82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#a2b884f54710b4d6308ba95ba0d899d82">getPositionInfo</a> (const std::string &amp;base_frame, const std::string &amp;target_frame, const tf::TransformListener &amp;listener, geometry_msgs::Pose *position, std::vector&lt; double &gt; *rpy)</td></tr>
+<tr class="memdesc:a2b884f54710b4d6308ba95ba0d899d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current postion of a sensor from the tf transformation service.  <a href="#a2b884f54710b4d6308ba95ba0d899d82">More...</a><br /></td></tr>
 <tr class="separator:a2b884f54710b4d6308ba95ba0d899d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a514c360d69e5ae34636180e294dc5d3f"><td class="memItemLeft" align="right" valign="top">cv::Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#a514c360d69e5ae34636180e294dc5d3f">setGridPosition</a> (geometry_msgs::Pose &amp;sensor, nav_msgs::MapMetaData &amp;mapInfo)</td></tr>
+<tr class="memdesc:a514c360d69e5ae34636180e294dc5d3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the occupancy grid postion of a given pose.  <a href="#a514c360d69e5ae34636180e294dc5d3f">More...</a><br /></td></tr>
 <tr class="separator:a514c360d69e5ae34636180e294dc5d3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -89,32 +107,38 @@ Variables</h2></td></tr>
 <tr class="memitem:ac6ffa9d7fd137ba09c0ffca797c2ee17"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceusscan.html#ac6ffa9d7fd137ba09c0ffca797c2ee17">DEFAULT_US_RIGHT_TOPIC</a> = &quot;/uc_bridge/usr&quot;</td></tr>
 <tr class="separator:ac6ffa9d7fd137ba09c0ffca797c2ee17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a class="anchor" id="aab963254e2eb93931369ccdd1e0b9764"></a>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This namespace groups all typedefs, utility functions and parameter getter used in the simulation_us node. </p>
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a class="anchor" id="a7fa14e77da16c0162a677c247e6a9ddb"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::shared_ptr&lt;geometry_msgs::Pose&gt; <a class="el" href="namespaceusscan.html#aab963254e2eb93931369ccdd1e0b9764">usscan::pose_msg_ptr</a></td>
+          <td class="memname">usscan::us::pose_msg_ptr</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00041">41</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>shortcut for a pointer to a pose message </p>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00083">83</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a8a515e943a4c867615e1c4d50864fa3c"></a>
+<a class="anchor" id="aef8281ab9b68813b162f8b67b0459baf"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::shared_ptr&lt;sensor_msgs::Range&gt; <a class="el" href="namespaceusscan.html#a8a515e943a4c867615e1c4d50864fa3c">usscan::scan_msg_ptr</a></td>
+          <td class="memname">usscan::us::scan_msg_ptr</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00040">40</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>shortcut for a pointer to a range message </p>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00078">78</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -138,7 +162,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">rs::RangeSensor *&#160;</td>
+          <td class="paramtype"><a class="el" href="classrs_1_1RangeSensor.html">rs::RangeSensor</a> *&#160;</td>
           <td class="paramname"><em>sensor</em>, </td>
         </tr>
         <tr>
@@ -155,7 +179,18 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00089">89</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Sets the RangeSensorConfig object of this sensor simulation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>dynamic reconfigure object to reconfigure this sensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">level</td><td>unused </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sensor</td><td>current sensor simulation </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">dynConfig</td><td>dynamic reconfigure object to reconfigure this sensor </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00165">165</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -183,7 +218,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00109">109</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Get loop rate launch parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nh</td><td>pointer to a ros::NodeHandle object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">loopRate</td><td>loop rate in Hz </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00193">193</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -211,7 +255,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00218">218</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Get map frame id launch parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nh</td><td>pointer to a ros::NodeHandle object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">mapFrameID</td><td>coordinate system id of the map </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00341">341</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -239,7 +292,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00157">157</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Get map location launch parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nh</td><td>pointer to a ros::NodeHandle object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">mapLocation</td><td>path to the occupancy grid file (map) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00260">260</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -267,7 +329,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00169">169</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Get map meta data location launch parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nh</td><td>pointer to a ros::NodeHandle object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">mapMetadataLocation</td><td>path to the map meta data file </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00276">276</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -295,7 +366,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00194">194</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Get front ultra sonic sensor frame id launch parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nh</td><td>pointer to a ros::NodeHandle object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">usfFrameID</td><td>coordinate system id of this sensor </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00309">309</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -323,7 +403,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00133">133</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Get front ultra sonic sensor topic launch parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nh</td><td>pointer to a ros::NodeHandle object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">usfTopic</td><td>topic to which this node publishes sensor information. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00227">227</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -351,7 +440,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00206">206</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Get left ultra sonic sensor frame id launch parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nh</td><td>pointer to a ros::NodeHandle object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">uslFrameID</td><td>coordinate system id of this sensor </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00325">325</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -379,7 +477,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00145">145</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Get left ultra sonic sensor topic launch parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nh</td><td>pointer to a ros::NodeHandle object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">uslTopic</td><td>topic to which this node publishes sensor information. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00244">244</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -407,7 +514,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00182">182</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Get right ultra sonic sensor frame id launch parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nh</td><td>pointer to a ros::NodeHandle object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">usrFrameID</td><td>coordinate system id of this sensor </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00293">293</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -435,7 +551,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00121">121</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Get right ultra sonic sensor topic launch parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nh</td><td>pointer to a ros::NodeHandle object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">usrTopic</td><td>topic to which this node publishes sensor information. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00210">210</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -481,7 +606,19 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00050">50</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Get the current postion of a sensor from the tf transformation service. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">base_frame</td><td>frame id of the map coordinate system </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">target_frame</td><td>frame id of the sensor coordinate system </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">listener</td><td>tf transformation service </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">position</td><td>current position of the sensor </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">rpy</td><td>current orientation of the sensor (0: roll, 1:pitch, 2:yaw) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00111">111</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -509,7 +646,17 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00043">43</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Calculate the occupancy grid postion of a given pose. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">laser</td><td>pose message of the sensor </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapInfo</td><td>occupancy grid meta information </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a point in image coordinates </dd></dl>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00090">90</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -531,8 +678,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Frequency of this simulation. </p>
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00096">96</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00174">174</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -553,8 +701,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Coordinate system id of the map </p>
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00107">107</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00186">186</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -575,8 +724,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div><div class="line">    ros::package::getPath(<span class="stringliteral">&quot;pses_simulation&quot;</span>) + <span class="stringliteral">&quot;/data/map/map.pgm&quot;</span></div></div><!-- fragment -->
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00100">100</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<b>Initial value:</b><div class="fragment"><div class="line">=</div><div class="line">    ros::package::getPath(<span class="stringliteral">&quot;pses_simulation&quot;</span>) + <span class="stringliteral">&quot;/data/map/map.pgm&quot;</span></div></div><!-- fragment --><p>Path to the occupancy grid file (map) </p>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00178">178</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -597,8 +747,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div><div class="line">    ros::package::getPath(<span class="stringliteral">&quot;pses_simulation&quot;</span>) + <span class="stringliteral">&quot;/data/map/map.yaml&quot;</span></div></div><!-- fragment -->
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00102">102</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<b>Initial value:</b><div class="fragment"><div class="line">=</div><div class="line">    ros::package::getPath(<span class="stringliteral">&quot;pses_simulation&quot;</span>) + <span class="stringliteral">&quot;/data/map/map.yaml&quot;</span></div></div><!-- fragment --><p>Path to the occupancy grid meta data file </p>
+
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00180">180</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -619,8 +770,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Coordinate system id of the front sensor </p>
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00105">105</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00184">184</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -641,8 +793,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Topic to which this node publishes front sensor information. </p>
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00098">98</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00176">176</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -663,8 +816,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Coordinate system id of the left sensor </p>
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00106">106</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00185">185</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -685,8 +839,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Topic to which this node publishes left sensor information. </p>
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00099">99</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00177">177</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -707,8 +862,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Coordinate system id of the right sensor </p>
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00104">104</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00183">183</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -729,8 +885,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Topic to which this node publishes right sensor information. </p>
 
-<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00097">97</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
+<p>Definition at line <a class="el" href="simulation__us_8cpp_source.html#l00175">175</a> of file <a class="el" href="simulation__us_8cpp_source.html">simulation_us.cpp</a>.</p>
 
 </div>
 </div>
@@ -740,7 +897,7 @@ Variables</h2></td></tr>
 <hr size="1"><div style="align: right;">
 <a href="https://github.com/tud-pses/pses_simulation">pses_simulation</a><br />
 Author(s): Sebastian Ehmes <sebastian.ehmes@gmx.de></br />
-<small>autogenerated on Sat Oct 28 2017 00:34:41</small>
+<small>autogenerated on Sat Oct 28 2017 18:41:57</small>
 </div>
 </body>
 </html>

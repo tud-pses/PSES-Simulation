@@ -1,3 +1,9 @@
+/**
+ * @file "simulation_odom.cpp"
+ * @brief Implementation simulation_odom ros node.
+ *
+*/
+
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <std_msgs/Int16.h>
@@ -7,26 +13,59 @@
 #include <nav_msgs/Odometry.h>
 #include <tf/transform_broadcaster.h>
 
+/**
+ * @namespace simulation
+ * @brief This namespace groups all typedefs, utility functions and parameter
+ * getter used in the simulation_odom node
+*/
 namespace simulation
 {
-
+/**
+ * @typedef simulation::twist_msg
+ * @brief shortcut for a pointer to a twist message
+*/
 typedef geometry_msgs::Twist twist_msg;
+/**
+ * @typedef simulation::int16_msg
+ * @brief shortcut for a pointer to a int16 message
+*/
 typedef std_msgs::Int16 int16_msg;
+/**
+ * @typedef simulation::imu_msg
+ * @brief shortcut for a pointer to a IMU message
+*/
 typedef sensor_msgs::Imu imu_msg;
+/**
+ * @typedef simulation::odom_msg
+ * @brief shortcut for a pointer to a Odometry message
+*/
 typedef nav_msgs::Odometry odom_msg;
 
-static const double DEFAULT_CAR_WHEELBASE = 0.25;
-static const double DEFAULT_LOOP_RATE = 100.0;
-static const std::string DEFAULT_ODOM_FRAME_ID = "odom";
-static const std::string DEFAULT_ODOM_CHILD_FRAME_ID = "base_footprint";
-static const std::string DEFAULT_MOTION_COMMAND_TOPIC = "cmd_vel";
+static const double DEFAULT_CAR_WHEELBASE = 0.25; /**< Wheelbase in meters */
+static const double DEFAULT_LOOP_RATE =
+    100.0; /**< Frequency of this simulation.*/
+static const std::string DEFAULT_ODOM_FRAME_ID =
+    "odom"; /**< Coordinate system id of the odometry*/
+static const std::string DEFAULT_ODOM_CHILD_FRAME_ID =
+    "base_footprint"; /**< Base coordinate system id of the robot*/
+static const std::string DEFAULT_MOTION_COMMAND_TOPIC =
+    "cmd_vel"; /**< Topic from which this node gets motion commands.*/
 static const std::string DEFAULT_STEERING_COMMAND_TOPIC =
-    "/uc_bridge/set_steering_level_msg";
+    "/uc_bridge/set_steering_level_msg"; /**< Topic from which this node gets
+                                            steering level commands.*/
 static const std::string DEFAULT_MOTOR_COMMAND_TOPIC =
-    "/uc_bridge/set_motor_level_msg";
-static const std::string DEFAULT_ODOM_TOPIC = "odom";
-static const std::string DEFAULT_IMU_TOPIC = "/uc_bridge/imu";
+    "/uc_bridge/set_motor_level_msg"; /**< Topic from which this node gets
+                                         motor level commands.*/
+static const std::string DEFAULT_ODOM_TOPIC =
+    "odom"; /**< Topic to which this node publishes odometry info.*/
+static const std::string DEFAULT_IMU_TOPIC =
+    "/uc_bridge/imu"; /**< Topic to which this node publishes IMU messages.*/
 
+/**
+ * @brief Get wheel base launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] wheelBase wheelbase in meter
+*/
 void fetchWheelBase(ros::NodeHandle* nh, double& wheelBase)
 {
   if (nh->hasParam("odom_sim/wheel_base"))
@@ -38,7 +77,11 @@ void fetchWheelBase(ros::NodeHandle* nh, double& wheelBase)
     wheelBase = DEFAULT_CAR_WHEELBASE;
   }
 }
-
+/**
+ * @brief Get loop rate launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] loopRate loop rate in Hz
+*/
 void fetchLoopRate(ros::NodeHandle* nh, double& loopRate)
 {
   if (nh->hasParam("odom_sim/loop_rate_control"))
@@ -50,7 +93,11 @@ void fetchLoopRate(ros::NodeHandle* nh, double& loopRate)
     loopRate = DEFAULT_LOOP_RATE;
   }
 }
-
+/**
+ * @brief Get odom frame id launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] odomFrameID coordinate system id of the odometry
+*/
 void fetchOdomFrameID(ros::NodeHandle* nh, std::string& odomFrameID)
 {
   if (nh->hasParam("odom_sim/odom_frame_id"))
@@ -62,7 +109,12 @@ void fetchOdomFrameID(ros::NodeHandle* nh, std::string& odomFrameID)
     odomFrameID = DEFAULT_ODOM_FRAME_ID;
   }
 }
-
+/**
+ * @brief Get odom child frame id launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] odomChildFrameID coordinate system id of the root coordinate
+ * system of the robot
+*/
 void fetchOdomChildFrameID(ros::NodeHandle* nh, std::string& odomChildFrameID)
 {
   if (nh->hasParam("odom_sim/odom_child_frame_id"))
@@ -74,7 +126,12 @@ void fetchOdomChildFrameID(ros::NodeHandle* nh, std::string& odomChildFrameID)
     odomChildFrameID = DEFAULT_ODOM_CHILD_FRAME_ID;
   }
 }
-
+/**
+ * @brief Get motion command topic launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] motionCommandTopic topic from which this node gets motion
+ * commands
+*/
 void fetchMotionCommandTopic(ros::NodeHandle* nh,
                              std::string& motionCommandTopic)
 {
@@ -87,21 +144,30 @@ void fetchMotionCommandTopic(ros::NodeHandle* nh,
     motionCommandTopic = DEFAULT_MOTION_COMMAND_TOPIC;
   }
 }
-
+/**
+ * @brief Get steering command topic launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] steeringCommandTopic topic from which this node gets steering
+ * level commands
+*/
 void fetchSteeringCommandTopic(ros::NodeHandle* nh,
                                std::string& steeringCommandTopic)
 {
   if (nh->hasParam("odom_sim/steering_command_topic"))
   {
-    nh->getParam("odom_sim/steering_command_topic",
-                 steeringCommandTopic);
+    nh->getParam("odom_sim/steering_command_topic", steeringCommandTopic);
   }
   else
   {
     steeringCommandTopic = DEFAULT_STEERING_COMMAND_TOPIC;
   }
 }
-
+/**
+ * @brief Get motor command topic launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] motorCommandTopic topic from which this node gets motor level
+ * commands
+*/
 void fetchMotorCommandTopic(ros::NodeHandle* nh, std::string& motorCommandTopic)
 {
   if (nh->hasParam("odom_sim/motor_command_topic"))
@@ -113,7 +179,11 @@ void fetchMotorCommandTopic(ros::NodeHandle* nh, std::string& motorCommandTopic)
     motorCommandTopic = DEFAULT_MOTOR_COMMAND_TOPIC;
   }
 }
-
+/**
+ * @brief Get odometry topic launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] odomTopic topic to which this node publishes odometry info
+*/
 void fetchOdomTopic(ros::NodeHandle* nh, std::string& odomTopic)
 {
   if (nh->hasParam("odom_sim/odom_topic"))
@@ -125,8 +195,13 @@ void fetchOdomTopic(ros::NodeHandle* nh, std::string& odomTopic)
     odomTopic = DEFAULT_ODOM_TOPIC;
   }
 }
-
-void fetchImuTopic(ros::NodeHandle* nh, std::string& imuTopic){
+/**
+ * @brief Get imu topic launch parameter.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] imuTopic topic to which this node publishes IMU messages
+*/
+void fetchImuTopic(ros::NodeHandle* nh, std::string& imuTopic)
+{
   if (nh->hasParam("odom_sim/imu_topic"))
   {
     nh->getParam("odom_sim/imu_topic", imuTopic);
@@ -136,21 +211,39 @@ void fetchImuTopic(ros::NodeHandle* nh, std::string& imuTopic){
     imuTopic = DEFAULT_IMU_TOPIC;
   }
 }
-
+/**
+ * @brief Motion command topic callback
+ * @param[in] cmdIn input motion message
+ * @param[out] cmdOut output motion message
+ * @param[out] isTwistCmd determines whether the data came from a motion command
+ * or motor/steering level command.
+*/
 void motionCommand(const twist_msg::ConstPtr& cmdIn, twist_msg* cmdOut,
                    bool* isTwistCmd)
 {
   *cmdOut = *cmdIn;
   *isTwistCmd = true;
 }
-
+/**
+ * @brief Steering command topic callback
+ * @param[in] cmdIn input steering level message
+ * @param[out] cmdOut output steering level
+ * @param[out] isTwistCmd determines whether the data came from a motion command
+ * or motor/steering level command.
+*/
 void steeringCommand(const int16_msg::ConstPtr& cmdIn, int* cmdOut,
                      bool* isTwistCmd)
 {
   *cmdOut = cmdIn->data;
   *isTwistCmd = false;
 }
-
+/**
+ * @brief Motor command topic callback
+ * @param[in] cmdIn input motor level message
+ * @param[out] cmdOut output motor level
+ * @param[out] isTwistCmd determines whether the data came from a motion command
+ * or motor/steering level command.
+*/
 void motorCommand(const int16_msg::ConstPtr& cmdIn, int* cmdOut,
                   bool* isTwistCmd)
 {
@@ -160,7 +253,9 @@ void motorCommand(const int16_msg::ConstPtr& cmdIn, int* cmdOut,
 }
 
 using namespace simulation;
-
+/**
+ * @brief Main function of this ros node.
+*/
 int main(int argc, char** argv)
 {
 
@@ -200,8 +295,7 @@ int main(int argc, char** argv)
       steeringCmdTopic, 1,
       boost::bind(steeringCommand, _1, &steeringCmd, &isTwistCmd));
   ros::Subscriber motorControl = nh.subscribe<int16_msg>(
-      motorCmdTopic, 1,
-      boost::bind(motorCommand, _1, &motorCmd, &isTwistCmd));
+      motorCmdTopic, 1, boost::bind(motorCommand, _1, &motorCmd, &isTwistCmd));
   ros::Publisher odomPub = nh.advertise<odom_msg>(odomTopic, 10);
   ros::Publisher imuPub = nh.advertise<imu_msg>(imuTopic, 10);
 
