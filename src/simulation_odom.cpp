@@ -281,7 +281,7 @@ int main(int argc, char** argv)
 
   std::vector<double> simPose;
   twist_msg motionCmd;
-  int steeringCmd, motorCmd;
+  int steeringCmd = 0, motorCmd = 0;
   bool isTwistCmd = true;
   tf::TransformBroadcaster odom_broadcaster;
   geometry_msgs::TransformStamped odom_trans;
