@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>pses_simulation</name>
-  <version>0.5.3</version>
+  <version>0.5.4</version>
   <description>The pses_simulation package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
