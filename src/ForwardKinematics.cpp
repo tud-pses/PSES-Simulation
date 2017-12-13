@@ -23,13 +23,28 @@ ForwardKinematics::ForwardKinematics(double k, std::vector<double> initialPose) 
 void ForwardKinematics::init()
 {
   PI = std::acos(-1);
-  initT = Eigen::Matrix4d::Identity();
   T.push_back(Eigen::Matrix4d::Identity());
-  prevT = initT;
+  Eigen::Matrix4d* rot = new Eigen::Matrix4d();
+  *rot = Eigen::Matrix4d::Identity();
+  Eigen::Matrix4d* trans = new Eigen::Matrix4d();
+  *trans = Eigen::Matrix4d::Identity();
+  double theta = currentPosition[2];
+  double x = currentPosition[0];
+  double y = currentPosition[1];
+  // init pose
+  (*rot)(0, 0) = flattenZeros(std::cos(theta));
+  (*rot)(0, 1) = flattenZeros(-std::sin(theta));
+  (*rot)(1, 0) = flattenZeros(std::sin(theta));
+  (*rot)(1, 1) = flattenZeros(std::cos(theta));
+  (*trans)(0, 3) = flattenZeros(x);
+  (*trans)(1, 3) = flattenZeros(y);
+  prevT = (*trans) * (*rot);
   prevT(0,3) = flattenZeros(currentPosition[0]);
   prevT(1,3) = flattenZeros(currentPosition[1]);
   prevT(0,0) = flattenZeros(std::cos(currentPosition[2]));
   prevT(1,0) = flattenZeros(std::sin(currentPosition[2]));
+  delete rot;
+  delete trans;
 }
 
 const double ForwardKinematics::getRadius() const { return radius; }
