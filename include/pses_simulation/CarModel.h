@@ -43,14 +43,18 @@ public:
    * @brief CarModel constructor.
    * @param[in] dAxis wheel base of the mobile robot in meters.
    * @param[in] time current Ros::Time.
+   * @param[in] initialPose initial pose of the robot. (0: - y-coordinate, 1:
+   x-coordinate, 2: yaw in radiants).
    * @param[in] vMax maximum speed of the mobile robot in meters/second.
    * @param[in] angleMax maximum steering angle of the mobile robot in degrees.
    * @param[in] speedMax maximum motor level of the mobile robot.
    * @param[in] steeringMax maximum steering level of the mobile robot.
+
   */
-  CarModel(const double dAxis, const ros::Time& time, const double vMax = 2.0,
-           const double angleMax = 22.5, const double speedMax = 20,
-           const double steeringMax = 50);
+  CarModel(const double dAxis, const ros::Time& time,
+           std::vector<double> initialPose = std::vector<double>(3, 0),
+           const double vMax = 2.0, const double angleMax = 22.5,
+           const double speedMax = 20, const double steeringMax = 50);
   /**
    * @brief Update the simulation with current control settings and time.
    *
@@ -134,29 +138,36 @@ public:
 
 private:
   ForwardKinematics fwdKin; /**< Simulation of ackerman kinematics */
-  ros::Time lastUpdate; /**< Ros time of last update */
-  double vMax; /**< Maximum velocity in m/s */
-  double angleMax; /**< Maximum steering angle in degrees */
-  double speedMax; /**< Maximum motor level */
-  double steeringMax; /**< Maximum steering level */
-  int steering; /**< Current steering level */
-  double steeringAngle; /**< Current steering angle */
-  double timeStep; /**< Current time step */
-  double velocity; /**< Current velocity */
-  double distance; /**< Total driven distance */
-  std::vector<double> pose; /**< Current pose (0: - y-coordinate, 1: x-coordinate, 2: yaw in radiants) */
-  double angularVelocity; /**< Current angular velocity in rad/s */
-  double v_x; /**< Current velocity in x direction relative to the global coordinate system.*/
-  double v_y; /**< Current velocity in y direction relative to the global coordinate system.*/
-  double a_x; /**< Current acceleration in x direction relative to the robot coordinate system.*/
-  double a_y; /**< Current acceleration in y direction relative to the robot coordinate system.*/
+  ros::Time lastUpdate;     /**< Ros time of last update */
+  double vMax;              /**< Maximum velocity in m/s */
+  double angleMax;          /**< Maximum steering angle in degrees */
+  double speedMax;          /**< Maximum motor level */
+  double steeringMax;       /**< Maximum steering level */
+  int steering;             /**< Current steering level */
+  double steeringAngle;     /**< Current steering angle */
+  double timeStep;          /**< Current time step */
+  double velocity;          /**< Current velocity */
+  double distance;          /**< Total driven distance */
+  std::vector<double> pose; /**< Current pose (0: - y-coordinate, 1:
+                               x-coordinate, 2: yaw in radiants) */
+  double angularVelocity;   /**< Current angular velocity in rad/s */
+  double v_x; /**< Current velocity in x direction relative to the global
+                 coordinate system.*/
+  double v_y; /**< Current velocity in y direction relative to the global
+                 coordinate system.*/
+  double a_x; /**< Current acceleration in x direction relative to the robot
+                 coordinate system.*/
+  double a_y; /**< Current acceleration in y direction relative to the robot
+                 coordinate system.*/
 
   /**
-   * @brief Conversion from current steering level to steering angle based on a lookup table.
+   * @brief Conversion from current steering level to steering angle based on a
+   * lookup table.
   */
   void steeringToAngle();
   /**
-   * @brief Conversion from given steering angle to current steering level based on a lookup table.
+   * @brief Conversion from given steering angle to current steering level based
+   * on a lookup table.
    * @param[in] alpha steering angle in degrees
   */
   void angleToSteering(const double alpha);
@@ -171,12 +182,14 @@ private:
   */
   void setVelocity(const double newVel);
   /**
-   * @brief Conversion from given motor level to current velocity based on a lookup table.
+   * @brief Conversion from given motor level to current velocity based on a
+   * lookup table.
    * @param[in] speed motor level
   */
   void speedToVelocity(const int speed);
   /**
-   * @brief Calculate and set angular velocity by providing the orientation of the previous time step.
+   * @brief Calculate and set angular velocity by providing the orientation of
+   * the previous time step.
    * @param[in] oldYaw previous orientation
   */
   void setAngularVelocity(const double oldYaw);
@@ -185,7 +198,8 @@ private:
   */
   void setVelocityComponents();
   /**
-   * @brief Calculate and set current acceleration components in x and y direction
+   * @brief Calculate and set current acceleration components in x and y
+   * direction
    * @param[in] prevV previous velocity
   */
   void setAccelerationComponents(const double prevV);

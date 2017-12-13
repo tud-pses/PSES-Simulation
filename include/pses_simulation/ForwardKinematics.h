@@ -39,8 +39,9 @@ public:
   /**
    * @brief ForwardKinematics constructor.
    * @param[in] k wheel base of the mobile robot in meters.
+   * @param[in] initialPose initial pose of the robot. (0: - y-coordinate, 1: x-coordinate, 2: yaw in radiants)
   */
-  ForwardKinematics(double k);
+  ForwardKinematics(double k, std::vector<double> initialPose = std::vector<double>(3, 0));
   /**
    * @brief Get the radius of the current robot tracjectory around the instantaneous center of curvature (ICC).
    * @returns radius in meters

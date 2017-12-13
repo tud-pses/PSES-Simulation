@@ -42,6 +42,9 @@ typedef sensor_msgs::Imu imu_msg;
 typedef nav_msgs::Odometry odom_msg;
 
 static const double DEFAULT_CAR_WHEELBASE = 0.25; /**< Wheelbase in meters */
+static const double DEFAULT_CAR_X_COORDINATE = 0; /**< X-Coordinate in meters */
+static const double DEFAULT_CAR_Y_COORDINATE = 0; /**< Y-Coordinate in meters */
+static const double DEFAULT_CAR_YAW = 0; /**< Yaw in radians */
 static const double DEFAULT_LOOP_RATE =
     100.0; /**< Frequency of this simulation.*/
 static const std::string DEFAULT_ODOM_FRAME_ID =
@@ -77,6 +80,58 @@ void fetchWheelBase(ros::NodeHandle* nh, double& wheelBase)
     wheelBase = DEFAULT_CAR_WHEELBASE;
   }
 }
+
+/**
+ * @brief Get the initial x-coordinate of the robot.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] initialX Initial x-coordinate of the robot.
+*/
+void fetchInitialX(ros::NodeHandle* nh, double& initialX)
+{
+  if (nh->hasParam("odom_sim/initial_x_coordinate"))
+  {
+    nh->getParam("odom_sim/initial_x_coordinate", initialX);
+  }
+  else
+  {
+    initialX = DEFAULT_CAR_X_COORDINATE;
+  }
+}
+
+/**
+ * @brief Get the initial y-coordinate of the robot.
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] initialY Initial y-coordinate of the robot.
+*/
+void fetchInitialY(ros::NodeHandle* nh, double& initialY)
+{
+  if (nh->hasParam("odom_sim/initial_y_coordinate"))
+  {
+    nh->getParam("odom_sim/initial_y_coordinate", initialY);
+  }
+  else
+  {
+    initialY = DEFAULT_CAR_Y_COORDINATE;
+  }
+}
+
+/**
+ * @brief Get the initial yaw of the robot. (in radians).
+ * @param[in] nh pointer to a ros::NodeHandle object
+ * @param[out] initialYaw Initial yaw of the robot.
+*/
+void fetchInitialYaw(ros::NodeHandle* nh, double& initialYaw)
+{
+  if (nh->hasParam("odom_sim/initial_yaw"))
+  {
+    nh->getParam("odom_sim/initial_yaw", initialYaw);
+  }
+  else
+  {
+    initialYaw = DEFAULT_CAR_YAW;
+  }
+}
+
 /**
  * @brief Get loop rate launch parameter.
  * @param[in] nh pointer to a ros::NodeHandle object
@@ -262,7 +317,7 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "simulation_control");
   ros::NodeHandle nh;
   // create parameter variables
-  double loopRate, wheelBase;
+  double loopRate, wheelBase, initialX, initialY, initialYaw;
   std::string motionCmdTopic, steeringCmdTopic, motorCmdTopic, odomTopic,
       odomFrameID, odomChildFrameID, imuTopic;
   // fetch parameters from ros param server
@@ -275,9 +330,17 @@ int main(int argc, char** argv)
   fetchOdomFrameID(&nh, odomFrameID);
   fetchOdomChildFrameID(&nh, odomChildFrameID);
   fetchImuTopic(&nh, imuTopic);
+  fetchInitialX(&nh, initialX);
+  fetchInitialY(&nh, initialY);
+  fetchInitialYaw(&nh, initialYaw);
+  // Construct initial pose of the robot
+  std::vector<double> initialPose;
+  initialPose.push_back(-initialY);
+  initialPose.push_back(initialX);
+  initialPose.push_back(initialYaw);
   // get current time and configure our car model simulation
   ros::Time currentTime = ros::Time::now();
-  CarModel car(wheelBase, currentTime);
+  CarModel car(wheelBase, currentTime, initialPose);
 
   std::vector<double> simPose;
   twist_msg motionCmd;

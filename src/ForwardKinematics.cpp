@@ -6,7 +6,7 @@
 
 #include <pses_simulation/ForwardKinematics.h>
 
-ForwardKinematics::ForwardKinematics() : k(0.0) { init(); }
+ForwardKinematics::ForwardKinematics() : k(0.0), currentPosition(std::vector<double>(3, 0)) { init(); }
 ForwardKinematics::ForwardKinematics(const ForwardKinematics& other)
     : k(other.k)
 {
@@ -18,7 +18,7 @@ ForwardKinematics::ForwardKinematics(const ForwardKinematics& other)
   radius = 0;
 }
 
-ForwardKinematics::ForwardKinematics(double k) : k(k) { init(); }
+ForwardKinematics::ForwardKinematics(double k, std::vector<double> initialPose) : k(k), currentPosition(initialPose) { init(); }
 
 void ForwardKinematics::init()
 {
@@ -26,7 +26,10 @@ void ForwardKinematics::init()
   initT = Eigen::Matrix4d::Identity();
   T.push_back(Eigen::Matrix4d::Identity());
   prevT = initT;
-  currentPosition = std::vector<double>(3, 0);
+  prevT(0,3) = flattenZeros(currentPosition[0]);
+  prevT(1,3) = flattenZeros(currentPosition[1]);
+  prevT(0,0) = flattenZeros(std::cos(currentPosition[2]));
+  prevT(1,0) = flattenZeros(std::sin(currentPosition[2]));
 }
 
 const double ForwardKinematics::getRadius() const { return radius; }

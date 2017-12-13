@@ -6,14 +6,15 @@
 
 #include <pses_simulation/CarModel.h>
 
-CarModel::CarModel(const double dAxis, const ros::Time& time, const double vMax,
+CarModel::CarModel(const double dAxis, const ros::Time& time,
+                   std::vector<double> initialPose, const double vMax,
                    const double angleMax, const double speedMax,
                    const double steeringMax)
     : lastUpdate(time), vMax(vMax), angleMax(angleMax), speedMax(speedMax),
       steeringMax(steeringMax)
 {
   // init kinematic model
-  fwdKin = ForwardKinematics(dAxis);
+  fwdKin = ForwardKinematics(dAxis, initialPose);
   // set steering to quasi neutral
   setSteering(8);
   // start with stationary state
