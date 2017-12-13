@@ -38,9 +38,9 @@
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a402d55ac6d2630ecdac6083a84894a02"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCarModel.html#a402d55ac6d2630ecdac6083a84894a02">CarModel</a> (const double dAxis, const ros::Time &amp;time, const double <a class="el" href="classCarModel.html#a01b1cd9a86c51458c42270debd7583e4">vMax</a>=2.0, const double <a class="el" href="classCarModel.html#ae7a37f83165443a057dfce8513223421">angleMax</a>=22.5, const double <a class="el" href="classCarModel.html#af5b145b0cdab406c62096e3f5d64379e">speedMax</a>=20, const double <a class="el" href="classCarModel.html#a7107ed80daf005d6a5bfb7cf4b0950ba">steeringMax</a>=50)</td></tr>
-<tr class="memdesc:a402d55ac6d2630ecdac6083a84894a02"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCarModel.html" title="The CarModel class simulates kinematic behavoir of a car like mobile platform, by using the ForwardKi...">CarModel</a> constructor.  <a href="#a402d55ac6d2630ecdac6083a84894a02">More...</a><br /></td></tr>
-<tr class="separator:a402d55ac6d2630ecdac6083a84894a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32f03a6a8982c0150e7c19516dc75d1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCarModel.html#a32f03a6a8982c0150e7c19516dc75d1c">CarModel</a> (const double dAxis, const ros::Time &amp;time, std::vector&lt; double &gt; initialPose=std::vector&lt; double &gt;(3, 0), const double <a class="el" href="classCarModel.html#a01b1cd9a86c51458c42270debd7583e4">vMax</a>=2.0, const double <a class="el" href="classCarModel.html#ae7a37f83165443a057dfce8513223421">angleMax</a>=22.5, const double <a class="el" href="classCarModel.html#af5b145b0cdab406c62096e3f5d64379e">speedMax</a>=20, const double <a class="el" href="classCarModel.html#a7107ed80daf005d6a5bfb7cf4b0950ba">steeringMax</a>=50)</td></tr>
+<tr class="memdesc:a32f03a6a8982c0150e7c19516dc75d1c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCarModel.html" title="The CarModel class simulates kinematic behavoir of a car like mobile platform, by using the ForwardKi...">CarModel</a> constructor.  <a href="#a32f03a6a8982c0150e7c19516dc75d1c">More...</a><br /></td></tr>
+<tr class="separator:a32f03a6a8982c0150e7c19516dc75d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa0340412ce470309dcedcf07661abc7"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCarModel.html#afa0340412ce470309dcedcf07661abc7">getAngularVelocity</a> () const </td></tr>
 <tr class="memdesc:afa0340412ce470309dcedcf07661abc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current angular velocity of the mobile plattform.  <a href="#afa0340412ce470309dcedcf07661abc7">More...</a><br /></td></tr>
 <tr class="separator:afa0340412ce470309dcedcf07661abc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,7 +148,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="CarModel_8h_source.html#l00039">39</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a402d55ac6d2630ecdac6083a84894a02"></a>
+<a class="anchor" id="a32f03a6a8982c0150e7c19516dc75d1c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -163,6 +163,12 @@ Private Attributes</h2></td></tr>
           <td></td>
           <td class="paramtype">const ros::Time &amp;&#160;</td>
           <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>initialPose</em> = <code>std::vector&lt;double&gt;(3,&#160;0)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -201,6 +207,7 @@ Private Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">dAxis</td><td>wheel base of the mobile robot in meters. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">time</td><td>current Ros::Time. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">initialPose</td><td>initial pose of the robot. (0: - y-coordinate, 1: x-coordinate, 2: yaw in radiants). </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">vMax</td><td>maximum speed of the mobile robot in meters/second. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">angleMax</td><td>maximum steering angle of the mobile robot in degrees. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">speedMax</td><td>maximum motor level of the mobile robot. </td></tr>
@@ -244,7 +251,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00079">79</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00080">80</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -264,7 +271,7 @@ Private Attributes</h2></td></tr>
 <p>Get current angular velocity of the mobile plattform. </p>
 <dl class="section return"><dt>Returns</dt><dd>current angular velocity </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00072">72</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00073">73</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -284,7 +291,7 @@ Private Attributes</h2></td></tr>
 <p>Get current acceleration in x direction of the mobile plattform relative to the robot coordinate system. </p>
 <dl class="section return"><dt>Returns</dt><dd>current acceleration in x direction </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00076">76</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00077">77</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -304,7 +311,7 @@ Private Attributes</h2></td></tr>
 <p>Get current acceleration in y direction of the mobile plattform relative to the robot coordinate system. </p>
 <dl class="section return"><dt>Returns</dt><dd>current acceleration in y direction </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00077">77</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00078">78</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -324,7 +331,7 @@ Private Attributes</h2></td></tr>
 <p>Get total travelled distance of the mobile plattform. </p>
 <dl class="section return"><dt>Returns</dt><dd>total travelled distance </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00065">65</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00066">66</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -344,7 +351,7 @@ Private Attributes</h2></td></tr>
 <p>Get current steering level of the mobile plattform. </p>
 <dl class="section return"><dt>Returns</dt><dd>current steering level </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00069">69</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00070">70</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -364,7 +371,7 @@ Private Attributes</h2></td></tr>
 <p>Get current steering angle of the mobile plattform. </p>
 <dl class="section return"><dt>Returns</dt><dd>current steering angle </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00070">70</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00071">71</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -384,7 +391,7 @@ Private Attributes</h2></td></tr>
 <p>Get current time step. </p>
 <dl class="section return"><dt>Returns</dt><dd>current time step </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00063">63</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00064">64</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -429,7 +436,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>current position/speed/orientation/rotation of this mobile robot </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00027">27</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00028">28</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -467,7 +474,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>current position/speed/orientation/rotation of this mobile robot </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00045">45</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00046">46</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -487,7 +494,7 @@ Private Attributes</h2></td></tr>
 <p>Get current velocity of the mobile plattform. </p>
 <dl class="section return"><dt>Returns</dt><dd>current velocity </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00067">67</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00068">68</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -507,7 +514,7 @@ Private Attributes</h2></td></tr>
 <p>Get current velocity in x direction of the mobile plattform relative to the global coordinate system. </p>
 <dl class="section return"><dt>Returns</dt><dd>current velocity in x direction </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00074">74</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00075">75</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -527,7 +534,7 @@ Private Attributes</h2></td></tr>
 <p>Get current velocity in y direction of the mobile plattform relative to the global coordinate system. </p>
 <dl class="section return"><dt>Returns</dt><dd>current velocity in y direction </dd></dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00075">75</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00076">76</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -561,7 +568,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00154">154</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00155">155</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -595,7 +602,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00114">114</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00115">115</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -629,7 +636,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00127">127</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00128">128</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -663,7 +670,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00094">94</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00095">95</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -690,7 +697,7 @@ Private Attributes</h2></td></tr>
 
 <p>Calculate and set current velocity components in x and y direction. </p>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00149">149</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00150">150</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -724,7 +731,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00110">110</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00111">111</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -751,7 +758,7 @@ Private Attributes</h2></td></tr>
 
 <p>Conversion from current steering level to steering angle based on a lookup table. </p>
 
-<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00145">145</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8cpp_source.html#l00146">146</a> of file <a class="el" href="CarModel_8cpp_source.html">CarModel.cpp</a>.</p>
 
 </div>
 </div>
@@ -775,7 +782,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Current acceleration in x direction relative to the robot coordinate system. </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00151">151</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00158">158</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -798,7 +805,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Current acceleration in y direction relative to the robot coordinate system. </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00152">152</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00160">160</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -821,7 +828,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Maximum steering angle in degrees </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00139">139</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00143">143</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -844,7 +851,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Current angular velocity in rad/s </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00148">148</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00153">153</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -867,7 +874,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Total driven distance </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00146">146</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00150">150</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -890,7 +897,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Simulation of ackerman kinematics </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00136">136</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00140">140</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -913,7 +920,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Ros time of last update </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00137">137</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00141">141</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -936,7 +943,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Current pose (0: - y-coordinate, 1: x-coordinate, 2: yaw in radiants) </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00147">147</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00151">151</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -959,7 +966,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Maximum motor level </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00140">140</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00144">144</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -982,7 +989,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Current steering level </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00142">142</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00146">146</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -1005,7 +1012,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Current steering angle </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00143">143</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00147">147</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -1028,7 +1035,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Maximum steering level </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00141">141</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00145">145</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -1051,7 +1058,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Current time step </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00144">144</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00148">148</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -1074,7 +1081,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Current velocity in x direction relative to the global coordinate system. </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00149">149</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00154">154</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -1097,7 +1104,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Current velocity in y direction relative to the global coordinate system. </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00150">150</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00156">156</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -1120,7 +1127,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Current velocity </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00145">145</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00149">149</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -1143,7 +1150,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Maximum velocity in m/s </p>
 
-<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00138">138</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
+<p>Definition at line <a class="el" href="CarModel_8h_source.html#l00142">142</a> of file <a class="el" href="CarModel_8h_source.html">CarModel.h</a>.</p>
 
 </div>
 </div>
@@ -1157,7 +1164,7 @@ Private Attributes</h2></td></tr>
 <hr size="1"><div style="align: right;">
 <a href="https://github.com/tud-pses/pses_simulation">pses_simulation</a><br />
 Author(s): Sebastian Ehmes <sebastian.ehmes@gmx.de></br />
-<small>autogenerated on Sat Oct 28 2017 18:41:57</small>
+<small>autogenerated on Wed Dec 13 2017 19:37:54</small>
 </div>
 </body>
 </html>
