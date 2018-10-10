@@ -3,7 +3,7 @@
   <link name="base_footprint">
     <visual>
       <geometry>
-        <box size=".40 .20 0"/>
+        <box size="0.40 0.20 0"/>
       </geometry>
       <material name="nothing">
         <color rgba="0 0 0 0"/>
@@ -14,10 +14,10 @@
   <link name="base_link">
     <visual>
       <geometry>
-        <box size=".40 .20 .18"/>
+        <box size="0.40 0.20 0.18"/>
       </geometry>
       <material name="red">
-        <color rgba="0 0 .8 .3"/>
+        <color rgba="0 0 0.8 0.3"/>
       </material>
     </visual>
   </link>
@@ -25,16 +25,16 @@
   <joint name="base_link_joint" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
-    <origin xyz="0 0 .1"/>
+    <origin xyz="0 0 0.1"/>
   </joint>
 
   <link name="base_laser">
     <visual>
       <geometry>
-        <box size=".066 .24 .066"/>
+        <box size="0.066 0.24 0.066"/>
       </geometry>
       <material name="black">
-        <color rgba="0 0 0 .7"/>
+        <color rgba="0 0 0 0.7"/>
       </material>
     </visual>
   </link>
@@ -42,16 +42,16 @@
   <joint name="base_laser_joint" type="fixed">
     <parent link="base_link"/>
     <child link="base_laser"/>
-    <origin xyz=".18 0 .1"/>
+    <origin xyz="0.18 0 0.1"/>
   </joint>
 
   <link name="front_sensor">
     <visual>
       <geometry>
-        <box size=".05 .05 .05"/>
+        <box size="0.05 0.05 0.05"/>
       </geometry>
       <material name="black">
-        <color rgba="0 0 0 .3"/>
+        <color rgba="0 0 0 0.3"/>
       </material>
     </visual>
   </link>
@@ -59,16 +59,16 @@
   <joint name="front_sensor_joint" type="fixed">
     <parent link="base_link"/>
     <child link="front_sensor"/>
-    <origin xyz=".175 0 -.06"/>
+    <origin xyz="0.175 0 -0.06"/>
   </joint>
 
   <link name="left_sensor">
     <visual>
       <geometry>
-        <box size=".05 .05 .05"/>
+        <box size="0.05 0.05 0.05"/>
       </geometry>
       <material name="black">
-        <color rgba="0 0 0 .3"/>
+        <color rgba="0 0 0 0.3"/>
       </material>
     </visual>
   </link>
@@ -76,16 +76,16 @@
   <joint name="left_sensor_joint" type="fixed">
     <parent link="base_link"/>
     <child link="left_sensor"/>
-    <origin xyz="0 .1 -.06" rpy="0 0 1.57"/>
+    <origin xyz="0 0.1 -0.06" rpy="0 0 1.57"/>
   </joint>
 
   <link name="right_sensor">
     <visual>
       <geometry>
-        <box size=".05 .05 .05"/>
+        <box size="0.05 0.05 0.05"/>
       </geometry>
       <material name="black">
-        <color rgba="0 0 0 .3"/>
+        <color rgba="0 0 0 0.3"/>
       </material>
     </visual>
   </link>
@@ -93,7 +93,7 @@
   <joint name="right_sensor_joint" type="fixed">
     <parent link="base_link"/>
     <child link="right_sensor"/>
-    <origin xyz="0 -.1 -.06" rpy="0 0 -1.57"/>
+    <origin xyz="0 -0.1 -0.06" rpy="0 0 -1.57"/>
   </joint>
 
   <link name="scan">
@@ -117,12 +117,12 @@
   <link name="rear_right_wheel">
     <visual>
       <geometry>
-        <cylinder length=".045" radius=".05"/>
+        <cylinder length="0.045" radius="0.05"/>
       </geometry>
       <material name="black">
-        <color rgba="0 0 0 .7"/>
+        <color rgba="0 0 0 0.7"/>
       </material>
-      <origin xyz="0 -.02 0" rpy="1.57075 0 0"/>
+      <origin xyz="0 -0.02 0" rpy="1.57075 0 0"/>
     </visual>
   </link>
 
@@ -130,16 +130,16 @@
     <axis xyz="0 1 0"/>
     <parent link="base_link"/>
     <child link="rear_right_wheel"/>
-    <origin xyz="-.14 -.10 -.05"/>
+    <origin xyz="-0.14 -0.10 -0.05"/>
   </joint>
 
   <link name="rear_left_wheel">
     <visual>
       <geometry>
-        <cylinder length=".045" radius=".05"/>
+        <cylinder length="0.045" radius="0.05"/>
       </geometry>
       <material name="black"/>
-      <origin xyz="0 .02 0" rpy="1.57075 0 0"/>
+      <origin xyz="0 0.02 0" rpy="1.57075 0 0"/>
     </visual>
   </link>
 
@@ -147,7 +147,7 @@
     <axis xyz="0 1 0"/>
     <parent link="base_link"/>
     <child link="rear_left_wheel"/>
-    <origin xyz="-.14 0.1 -.05"/>
+    <origin xyz="-0.14 0.1 -0.05"/>
   </joint>
 
   <link name="front_right_steering"/>
@@ -157,16 +157,16 @@
     <axis xyz="0 0 1"/>
     <parent link="base_link"/>
     <child link="front_right_steering"/>
-    <origin xyz=".14 -0.1 -.05"/>
+    <origin xyz="0.14 -0.1 -.05"/>
   </joint>
 
   <link name="front_right_wheel">
     <visual>
       <geometry>
-        <cylinder length=".045" radius=".05"/>
+        <cylinder length="0.045" radius="0.05"/>
       </geometry>
       <material name="black"/>
-      <origin xyz="0 -.02 0" rpy="1.57075 0 0"/>
+      <origin xyz="0 -0.02 0" rpy="1.57075 0 0"/>
     </visual>
   </link>
 
@@ -183,16 +183,16 @@
     <axis xyz="0 0 1"/>
     <parent link="base_link"/>
     <child link="front_left_steering"/>
-    <origin xyz=".14 .1 -.05"/>
+    <origin xyz="0.14 0.1 -0.05"/>
   </joint>
 
   <link name="front_left_wheel">
     <visual>
       <geometry>
-        <cylinder length=".045" radius=".05"/>
+        <cylinder length="0.045" radius="0.05"/>
       </geometry>
       <material name="black"/>
-      <origin xyz="0 .02 0" rpy="1.57075 0 0"/>
+      <origin xyz="0 0.02 0" rpy="1.57075 0 0"/>
     </visual>
   </link>
 
@@ -205,10 +205,10 @@
   <link name="steering_servo">
     <visual>
       <geometry>
-        <box size=".04 .02 .01"/>
+        <box size="0.04 0.02 0.01"/>
       </geometry>
       <material name="green">
-        <color rgba="0 110 0 .5"/>
+        <color rgba="0 110 0 0.5"/>
       </material>
     </visual>
   </link>
@@ -216,7 +216,7 @@
   <joint name="steering_servo_joint" type="fixed">
     <parent link="base_link"/>
     <child link="steering_servo"/>
-    <origin xyz=".08 0 -.04"/>
+    <origin xyz="0.08 0 -0.04"/>
   </joint>
 
   <transmission name="front_left_steering_trans">
