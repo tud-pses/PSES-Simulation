@@ -154,7 +154,6 @@ target_link_libraries(odom_sim
 target_link_libraries(project_simulation
   ${catkin_LIBRARIES}
   ${OpenCV_LIBS}
-  project_simulation
 )
 
 target_link_libraries(us_sim
