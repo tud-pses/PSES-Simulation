@@ -36,7 +36,7 @@ bool getSessionID(pses_ucbridge::GetSessionID::Request& req,
                   pses_ucbridge::GetSessionID::Response& res)
 {
   res.answer_received = true;
-  res.ID = 0;
+  res.SID = 0;
   return true;
 }
 
