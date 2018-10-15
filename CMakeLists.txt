@@ -128,10 +128,6 @@ add_library(project_simulation
   src/ForwardKinematics.cpp
 )
 
-## Add cmake target dependencies of the library
-## as an example, code may need to be generated before libraries
-## either from message generation or dynamic reconfigure
-# add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
 add_executable(odom_sim src/simulation_odom.cpp)
@@ -141,7 +137,7 @@ add_executable(virtual_info src/simulation_virtual_car_info.cpp)
 
 add_dependencies(us_sim ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
 add_dependencies(laser_sim ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
-add_dependencies(virtual_info ${${PROJECT_NAME}_EXPORTED_TARGETS})
+add_dependencies(virtual_info ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(project_simulation ${PROJECT_NAME}_gencfg)
 
 ## Add cmake target dependencies of the executable
