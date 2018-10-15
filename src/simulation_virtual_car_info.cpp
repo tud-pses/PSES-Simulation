@@ -5,8 +5,10 @@
  *
 */
 
-#include <pses_ucbridge/uc_bridge.h>
-
+#include <ros/ros.h>
+#include <pses_ucbridge/GetFirmwareVersion.h>
+#include <pses_ucbridge/GetControllerID.h>
+#include <pses_ucbridge/GetSessionID.h>
 /**
  * @brief A call to this Service will return a "fake" car id for simulation purposes.
  * @param[in] req Request message is empty.
