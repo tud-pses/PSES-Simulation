@@ -18,10 +18,10 @@
  * @returns true is no errors occured, else false.
 */
 bool getControllerID(pses_ucbridge::GetControllerID::Request& req,
-                     pses_ucbridge::GetControllerID::Response& res, int& carID)
+                     pses_ucbridge::GetControllerID::Response& res, int* carID)
 {
   res.answer_received = true;
-  res.ID = carID;
+  res.ID = *carID;
   
   return true;
 }
@@ -51,8 +51,8 @@ bool getSessionID(pses_ucbridge::GetSessionID::Request& req,
 bool getFirmwareVersion(pses_ucbridge::GetFirmwareVersion::Request& req,
                         pses_ucbridge::GetFirmwareVersion::Response& res)
 {
-  res.answer_received = false;
-  res.version = "0.0";
+  res.answer_received = true;
+  res.version = "SIM";
   return true;
 }
 
@@ -64,7 +64,7 @@ int main(int argc, char** argv)
   
   // get launch paramer
   int carID;
-  nh.param<int>("/simulation/car_id", carID, 0);
+  nh.param<int>("/simulation_virtual_car_info/car_id", carID, 0);
 
   // register services with ros
   ros::ServiceServer getControllerIDService =
