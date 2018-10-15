@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   dynamic_reconfigure
   map_server
+  pses_ucbridge
 )
 find_package(OpenCV REQUIRED)
 
@@ -109,7 +110,7 @@ find_package(OpenCV REQUIRED)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES simulation
-#   CATKIN_DEPENDS message_runtime
+   CATKIN_DEPENDS pses_ucbridge
 )
 
 ###########
