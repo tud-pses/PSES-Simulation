@@ -13,6 +13,9 @@
         <node pkg="pses_simulation" type="odom_sim" name="odom_sim" output="screen"/>
         <node pkg="pses_simulation" type="us_sim" name="us_sim" output="screen"/>
         <node pkg="pses_simulation" type="laser_sim" name="laser_sim" output="screen"/>
+        <node pkg="pses_simulation" type="virtual_info" name="virtual_info" output="screen">
+        	<param name="car_id" value="0"/>
+        </node>
 	<!-- Run the map server -->
         <node name="map_server" pkg="map_server" type="map_server" args="$(find pses_simulation)/data/map/map.yaml"/>
 

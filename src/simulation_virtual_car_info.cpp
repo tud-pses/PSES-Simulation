@@ -14,13 +14,14 @@
  * @param[in] req Request message is empty.
  * @param[out] res Response message informs the calling process about the
  *success of the service call and the requested id.
+ * @param[carID] desired virtual car id
  * @returns true is no errors occured, else false.
 */
 bool getControllerID(pses_ucbridge::GetControllerID::Request& req,
-                     pses_ucbridge::GetControllerID::Response& res)
+                     pses_ucbridge::GetControllerID::Response& res, int carID)
 {
   res.answer_received = true;
-  res.ID = 0;
+  res.ID = carID;
   
   return true;
 }
@@ -51,7 +52,7 @@ bool getFirmwareVersion(pses_ucbridge::GetFirmwareVersion::Request& req,
                         pses_ucbridge::GetFirmwareVersion::Response& res)
 {
   res.answer_received = false;
-  res.version = "SIM";
+  res.version = "0.0";
   return true;
 }
 
@@ -61,14 +62,17 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "simulation_virtual_car_info", ros::init_options::NoSigintHandler);
   ros::NodeHandle nh;
   
-  
+  // get launch paramer
+  int carID;
+  nh.param<int>("/simulation/car_id", carID, 0);
+
   // register services with ros
   ros::ServiceServer getControllerIDService =
       nh.advertiseService<pses_ucbridge::GetControllerID::Request,
                           pses_ucbridge::GetControllerID::Response>(
           "/uc_bridge/get_controller_id",
           std::bind(getControllerID, std::placeholders::_1,
-                    std::placeholders::_2));
+                    std::placeholders::_2, &carID));
 
   ros::ServiceServer getFirmwareVersionService =
       nh.advertiseService<pses_ucbridge::GetFirmwareVersion::Request,
