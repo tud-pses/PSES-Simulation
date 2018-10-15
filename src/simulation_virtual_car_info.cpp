@@ -64,7 +64,7 @@ int main(int argc, char** argv)
   
   // get launch paramer
   int carID;
-  nh.param<int>("/simulation_virtual_car_info/car_id", carID, 0);
+  nh.param<int>("/virtual_info/car_id", carID, 0);
 
   // register services with ros
   ros::ServiceServer getControllerIDService =
