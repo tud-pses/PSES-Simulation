@@ -18,7 +18,7 @@
  * @returns true is no errors occured, else false.
 */
 bool getControllerID(pses_ucbridge::GetControllerID::Request& req,
-                     pses_ucbridge::GetControllerID::Response& res, int carID)
+                     pses_ucbridge::GetControllerID::Response& res, int& carID)
 {
   res.answer_received = true;
   res.ID = carID;
