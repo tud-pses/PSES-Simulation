@@ -136,9 +136,11 @@ add_library(project_simulation
 add_executable(odom_sim src/simulation_odom.cpp)
 add_executable(laser_sim src/simulation_laser.cpp)
 add_executable(us_sim src/simulation_us.cpp)
+add_executable(virtual_info src/simulation_virtual_car_info.cpp)
 
 add_dependencies(us_sim ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
 add_dependencies(laser_sim ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
+add_dependencies(virtual_info ${${PROJECT_NAME}_EXPORTED_TARGETS})
 add_dependencies(project_simulation ${PROJECT_NAME}_gencfg)
 
 ## Add cmake target dependencies of the executable
@@ -154,6 +156,10 @@ target_link_libraries(odom_sim
 target_link_libraries(project_simulation
   ${catkin_LIBRARIES}
   ${OpenCV_LIBS}
+)
+
+target_link_libraries(virtual_info
+  ${catkin_LIBRARIES}
 )
 
 target_link_libraries(us_sim
